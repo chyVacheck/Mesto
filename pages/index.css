@@ -1,6 +1,17 @@
 /* * подключаем vendor */
 /* ? подключаем normalize */
 @import url(./../vendor/normalize.css);
+/* ? подключаем шрифты */
+@import url(./../vendor/fonts/fonts.css);
+
+/* ? подключаем popup */
+@import url(./../blocks/popup/popup.css);
+@import url(./../blocks/popup/_opened/popup_opened.css);
+@import url(./../blocks/popup/__container/popup__container.css);
+@import url(./../blocks/popup/__close-button/popup__close-button.css);
+@import url(./../blocks/popup/__title/popup__title.css);
+@import url(./../blocks/popup/__input/popup__input.css);
+@import url(./../blocks/popup/__submit-button/popup__submit-button.css);
 
 /*!  подключаем page */
 @import url(./../blocks/page/page.css);
@@ -9,11 +20,22 @@
 @import url(./../blocks/header/header.css);
 @import url(./../blocks/header/__logo/header__logo.css);
 
-
 /*! подключаем блок content */
 @import url(./../blocks/content/content.css);
 /* todo подключаем секцию profile */
 @import url(./../blocks/profile/profile.css);
+/*? подлкючаем элементы avatar info add-button */
+@import url(./../blocks/profile/__avatar/profile__avatar.css);
+
+@import url(./../blocks/profile/__info/profile__info.css);
+  /*? подлкючаем элементы nickname edit-button description */
+  @import url(./../blocks/profile/__nickname/profile__nickname.css);
+  @import url(./../blocks/profile/__edit-button/profile__edit-button.css);
+  @import url(./../blocks/profile/__description/profile__description.css);
+  @import url(./../blocks/profile/__nick-and-button/profile__nick-and-button.css);
+
+@import url(./../blocks/profile/__add-button/profile__add-button.css);
+
 /* todo подключаем секцию elements */
 @import url(./../blocks/elements/elements.css);
 
