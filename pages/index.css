@@ -38,6 +38,13 @@
 
 /* todo подключаем секцию elements */
 @import url(./../blocks/elements/elements.css);
+@import url(./../blocks/elements/__list-cards/elements__list-cards.css);
+@import url(./../blocks/elements/__card/elements__card.css);
+@import url(./../blocks/elements/__card-image/elements__card-image.css);
+@import url(./../blocks/elements/__card-title-and-like/elements__card-title-and-like.css);
+@import url(./../blocks/elements/__card-title/elements__card-title.css);
+@import url(./../blocks/elements/__card-like/elements__card-like.css);
+@import url(./../blocks/elements/__card-like/__card-like_active/elements__card-like_active.css); /** модификатор active */
 
 /*! подключаем блок footer */
 @import url(./../blocks/footer/footer.css);

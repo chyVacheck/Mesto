@@ -1,9 +1,9 @@
 .page {
-  min-width: 320px;
   padding: 45px 0 60px 0;
   background-color: #000;
   color: #fff;
   font-family: "Inter";
+  font-style: normal;
 }
 
 @media screen and (min-width: 544px) and (max-width: 1152px) {

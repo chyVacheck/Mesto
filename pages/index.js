@@ -1,28 +1,30 @@
 console.log('Привет');
 
 let page = document.querySelector('.page');
-// let header = page.querySelector('.header');
+//todo let header = page.querySelector('.header');
 let content = page.querySelector('.content');
-// let footer = page.querySelector('.footer');
+//todo let footer = page.querySelector('.footer');
 
 let popup = document.querySelector('.popup');
-let popup__closeButton = popup.querySelector('.popup__close-button');
-let popup__inputNickname = popup.querySelector('#input-nickname');
-let popup__inputDescription = popup.querySelector('#input-description');
-
-let popup__submitButton = popup.querySelector('.popup__submit-button');
-
+let popupCloseButton = popup.querySelector('.popup__close-button');
+let popupSubmitButton = popup.querySelector('.popup__submit-button');
+let popupForm = popup.querySelector('#popup__form');
+let popupInputNickname = popupForm.querySelector('#input-nickname');
+let popupInputDescription = popupForm.querySelector('#input-description');
 
 let profile = content.querySelector('.profile');
-let profile__info = profile.querySelector('.profile__info');
-let profile__nickname = profile.querySelector('.profile__nickname');
-let profile__description = profile.querySelector('.profile__description');
+let profileInfo = profile.querySelector('.profile__info');
+let profileNickname = profileInfo.querySelector('.profile__nickname');
+let profileDescription = profileInfo.querySelector('.profile__description');
 
-let profile__editButton = profile__info.querySelector('.profile__edit-button');
-let profile__addButton = profile.querySelector('.profile__add-button');
+let profileEditButton = profileInfo.querySelector('.profile__edit-button');
+//todo let profileAddButton = profile.querySelector('.profile__add-button');
 
 // открываем поп ап
 function open_popup() {
+  popupInputNickname.value = profileNickname.textContent;
+  popupInputDescription.value = profileDescription.textContent;
+
   popup.classList.add('popup_opened');
 }
 
@@ -32,14 +34,17 @@ function close_popup() {
 }
 
 // размещаеи инфу из inputov, в профиль
-function submit_info() {
-  let popup__inputNickname = popup.querySelector('#input-nickname');
-  let popup__inputDescription = popup.querySelector('#input-description');
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  let popupInputNickname = popupForm.querySelector('#input-nickname');
+  let popupInputDescription = popupForm.querySelector('#input-description');
 
-  profile__nickname.textContent = popup__inputNickname.value;
-  profile__description.textContent = popup__inputDescription.value;
+  profileNickname.textContent = popupInputNickname.value;
+  profileDescription.textContent = popupInputDescription.value;
 }
 
-profile__editButton.addEventListener('click', open_popup);
-popup__closeButton.addEventListener('click', close_popup);
-popup__submitButton.addEventListener('click', submit_info);
+profileEditButton.addEventListener('click', open_popup);
+popupCloseButton.addEventListener('click', close_popup);
+popupSubmitButton.addEventListener('click', formSubmitHandler);
+
+popupForm.addEventListener('submit', formSubmitHandler);

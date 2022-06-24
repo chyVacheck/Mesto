@@ -18,7 +18,11 @@
     <main class="content">
       <!-- todo секция profile -->
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.svg" alt="здесь должен быть ваш аватар"/>
+        <img
+          class="profile__avatar"
+          src="./images/avatar.svg"
+          alt="здесь должен быть ваш аватар"
+        />
         <div class="profile__info">
           <div class="profile__nick-and-button">
             <h1 class="profile__nickname">Жак-Ив Кусто</h1>
@@ -29,28 +33,102 @@
         <button class="profile__add-button"></button>
       </section>
       <!-- todo секция elements-->
-      <section class="elements"></section>
+      <section class="elements">
+        <ul class="elements__list-cards">
+          <li class="elements__card">
+            <img
+              class="elements__card-image"
+              src="./images/cards/Karachaevsk.svg"
+              alt="Монастырь в Карачаевске"
+            />
+            <div class="elements__card-title-and-like">
+              <h2 class="elements__card-title">Карачаевск</h2>
+              <button class="elements__card-like"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img
+              class="elements__card-image"
+              src="./images/cards/Karachaevsk.svg"
+              alt="Монастырь в Карачаевске"
+            />
+            <div class="elements__card-title-and-like">
+              <h2 class="elements__card-title">Карачаевск</h2>
+              <button class="elements__card-like"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img
+              class="elements__card-image"
+              src="./images/cards/Karachaevsk.svg"
+              alt="Монастырь в Карачаевске"
+            />
+            <div class="elements__card-title-and-like">
+              <h2 class="elements__card-title">Карачаевск</h2>
+              <button class="elements__card-like"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img
+              class="elements__card-image"
+              src="./images/cards/Karachaevsk.svg"
+              alt="Монастырь в Карачаевске"
+            />
+            <div class="elements__card-title-and-like">
+              <h2 class="elements__card-title">Карачаевск</h2>
+              <button class="elements__card-like"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img
+              class="elements__card-image"
+              src="./images/cards/Karachaevsk.svg"
+              alt="Монастырь в Карачаевске"
+            />
+            <div class="elements__card-title-and-like">
+              <h2 class="elements__card-title">Карачаевск</h2>
+              <button class="elements__card-like"></button>
+            </div>
+          </li>
+          <li class="elements__card">
+            <img
+              class="elements__card-image"
+              src="./images/cards/Karachaevsk.svg"
+              alt="Монастырь в Карачаевске"
+            />
+            <div class="elements__card-title-and-like">
+              <h2 class="elements__card-title">Карачаевск</h2>
+              <button class="elements__card-like"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
     </main>
     <!--  ! подвал сайта, блок footer -->
-    <footer class="footer"></footer>
+    <footer class="footer" lang="en">© 2020 Mesto Russia</footer>
 
     <!--  ! popupы сайта -->
     <!-- todo popup редактировать профиль -->
     <article class="popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input" value="Жак-Ив Кусто" id="input-nickname">
-        <input class="popup__input" value="Исследователь океана" id="input-description">
-        <button class="popup__submit-button">
-          Сохранить
-        </button>
+        <form id="popup__form">
+          <input
+            class="popup__input"
+            value="Жак-Ив Кусто"
+            id="input-nickname"
+          />
+          <input
+            class="popup__input"
+            value="Исследователь океана"
+            id="input-description"
+          />
+          <button class="popup__submit-button">Сохранить</button>
+        </form>
 
-        <button class="popup__close-button">
-        </button>
+        <button class="popup__close-button"></button>
       </div>
     </article>
-    <script src="./pages/index.js">
-
-    </script>
+    <script src="./pages/index.js"></script>
   </body>
 </html>
