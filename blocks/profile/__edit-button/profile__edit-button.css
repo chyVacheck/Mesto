@@ -8,6 +8,7 @@
   background-image: url(./../../../images/edit-button.svg);
   background-size: contain;
   align-self: flex-end;
+  cursor: pointer;
 }
 
 /*? 544 - 1152 */

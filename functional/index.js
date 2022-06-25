@@ -36,15 +36,12 @@ function close_popup() {
 // размещаеи инфу из inputov, в профиль
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  let popupInputNickname = popupForm.querySelector('#input-nickname');
-  let popupInputDescription = popupForm.querySelector('#input-description');
-
   profileNickname.textContent = popupInputNickname.value;
   profileDescription.textContent = popupInputDescription.value;
+  close_popup();
 }
 
 profileEditButton.addEventListener('click', open_popup);
 popupCloseButton.addEventListener('click', close_popup);
-popupSubmitButton.addEventListener('click', formSubmitHandler);
 
 popupForm.addEventListener('submit', formSubmitHandler);

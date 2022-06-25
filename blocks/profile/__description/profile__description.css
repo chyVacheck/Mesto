@@ -1,6 +1,5 @@
 .profile__description {
   margin: 0;
-  max-height: 22px;
 
   font-weight: 400;
   font-size: 18px;
@@ -10,6 +9,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-family: "Inter";
 }
 
 /*? 544 - 1152 */
