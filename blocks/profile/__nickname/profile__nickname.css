@@ -11,7 +11,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-family: "Inter";
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 /*? 544 - 1152 */
