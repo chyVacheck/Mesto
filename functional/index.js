@@ -21,7 +21,7 @@ let profileEditButton = profileInfo.querySelector('.profile__edit-button');
 //todo let profileAddButton = profile.querySelector('.profile__add-button');
 
 // открываем поп ап
-function open_popup() {
+function openPopup() {
   popupInputNickname.value = profileNickname.textContent;
   popupInputDescription.value = profileDescription.textContent;
 
@@ -29,7 +29,7 @@ function open_popup() {
 }
 
 // закрываем поп ап
-function close_popup() {
+function closePopup() {
   popup.classList.remove('popup_opened');
 }
 
@@ -38,10 +38,10 @@ function formSubmitHandler(evt) {
   evt.preventDefault();
   profileNickname.textContent = popupInputNickname.value;
   profileDescription.textContent = popupInputDescription.value;
-  close_popup();
+  closePopup();
 }
 
-profileEditButton.addEventListener('click', open_popup);
-popupCloseButton.addEventListener('click', close_popup);
+profileEditButton.addEventListener('click', openPopup);
+popupCloseButton.addEventListener('click', closePopup);
 
 popupForm.addEventListener('submit', formSubmitHandler);
