@@ -132,38 +132,53 @@ const elementsListCard = elements.querySelector('.elements__list-cards');
 let initialCards = [
   {
     name: 'Карачаевск',
-    link: './images/cards/Karachaevsk.png',
+    link: 'https://images.unsplash.com/photo-1588584922681-745a2223f72c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
     alt: 'Карачаевск'
   },
   {
-    name: 'Золотые ворота',
-    link: './images/cards/gold_gate.png',
-    alt: 'Величественные Золотые ворота в Киеве'
+    name: 'Байкал',
+    link: 'https://images.unsplash.com/photo-1619527441512-97d55b860d78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
+    alt: 'Байкал'
   },
   {
     name: 'Карпаты',
-    link: './images/cards/Karpatu.jpg',
-    alt: 'Красивый гора Карпаты'
+    link: 'https://images.unsplash.com/photo-1632087778661-26040de8b4ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
+    alt: 'Красивые Карпаты'
   },
   {
-    name: 'Домбай',
-    link: './images/cards/Dombay.jpg',
-    alt: 'Домбай просто Домбай'
+    name: 'Гора Петрос',
+    link: 'https://images.unsplash.com/photo-1618380037378-6b7c28a8293a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1889&q=80',
+    alt: 'Гора Петрос, Украина'
+  },
+  {
+    name: 'Сочи',
+    link: 'https://images.unsplash.com/photo-1605248278520-2f5370c26b8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1211&q=80',
+    alt: 'Сочи Россия'
   },
   {
     name: 'Гора Эльбрус',
-    link: './images/cards/Gora_Elbrus.jpg',
+    link: 'https://images.unsplash.com/photo-1626518139514-65676cf25bac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
     alt: 'Красивая гора Эльбрус'
   },
   {
-    name: 'Франция',
-    link: './images/cards/Franch.jpg',
-    alt: 'Знаменитая Эльфеева башня'
+    name: 'Обское море',
+    link: 'https://images.unsplash.com/photo-1595933868307-5a7083dfb921?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
+    alt: 'Красивый вид природы в обском море'
   },
   {
-    name: 'Одесса',
-    link: './images/cards/OdessaBeach.jpg',
+    name: 'Одесский пляж',
+    link: 'https://images.unsplash.com/photo-1596523965234-f45cda35d1e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
     alt: 'Красивый одесский пляж'
+  },
+  {
+    name: 'Реслпублика Карелия',
+    link: 'https://images.unsplash.com/photo-1630763741321-16e7bff61e2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    alt: 'Красивый реслпублика Карелия'
+  },
+  {
+    name: 'Сочи',
+    link: 'https://images.unsplash.com/photo-1603787277977-0237f776f1ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
+    alt: 'Красивый вид гор в Сочи'
   }
 ]
 
