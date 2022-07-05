@@ -35,72 +35,6 @@
       <!-- todo секция elements-->
       <section class="elements">
         <ul class="elements__list-cards">
-          <li class="elements__card">
-            <img
-              class="elements__card-image"
-              src="./images/cards/Karachaevsk.png"
-              alt="Монастырь в Карачаевске"
-            />
-            <div class="elements__card-title-and-like">
-              <h2 class="elements__card-title">Карачаевск</h2>
-              <button aria-label="поставить или убрать лайк" type="button" class="elements__card-like"></button>
-            </div>
-          </li>
-          <li class="elements__card">
-            <img
-              class="elements__card-image"
-              src="./images/cards/gold_gate.png"
-              alt="Золотые ворота в Киеве"
-            />
-            <div class="elements__card-title-and-like">
-              <h2 class="elements__card-title">Золотые ворота</h2>
-              <button aria-label="поставить или убрать лайк" type="button" class="elements__card-like"></button>
-            </div>
-          </li>
-          <li class="elements__card">
-            <img
-              class="elements__card-image"
-              src="./images/cards/Karpatu.jpg"
-              alt="Горы Карпаты"
-            />
-            <div class="elements__card-title-and-like">
-              <h2 class="elements__card-title">Карпаты</h2>
-              <button aria-label="поставить или убрать лайк" type="button" class="elements__card-like"></button>
-            </div>
-          </li>
-          <li class="elements__card">
-            <img
-              class="elements__card-image"
-              src="./images/cards/Dombay.jpg"
-              alt="Домбай"
-            />
-            <div class="elements__card-title-and-like">
-              <h2 class="elements__card-title">Домбай</h2>
-              <button aria-label="поставить или убрать лайк" type="button" class="elements__card-like"></button>
-            </div>
-          </li>
-          <li class="elements__card">
-            <img
-              class="elements__card-image"
-              src="./images/cards/Franch.jpg"
-              alt="Эльфева башня в Париже"
-            />
-            <div class="elements__card-title-and-like">
-              <h2 class="elements__card-title">Франция</h2>
-              <button aria-label="поставить или убрать лайк" type="button" class="elements__card-like"></button>
-            </div>
-          </li>
-          <li class="elements__card">
-            <img
-              class="elements__card-image"
-              src="./images/cards/Gora_Elbrus.jpg"
-              alt="Гора Эльбрус"
-            />
-            <div class="elements__card-title-and-like">
-              <h2 class="elements__card-title">Гора Эльбрус</h2>
-              <button aria-label="поставить или убрать лайк" type="button" class="elements__card-like"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -125,12 +59,39 @@
             value="Исследователь океана"
             id="input-description"
           />
-          <button type="submit" class="popup__submit-button">Сохранить</button>
+          <button type="submit" class="popup__submit-button button">
+            Сохранить
+          </button>
         </form>
 
-        <button aria-label="закрыть окно поп-апа" type="button" class="popup__close-button"></button>
+        <button
+          aria-label="закрыть окно поп-апа"
+          type="button"
+          class="popup__close-button button"
+        ></button>
       </div>
     </div>
+
+    <!--  ! templates сайта -->
+    <!-- todo template для карточек -->
+    <template id="templateCard">
+      <li class="elements__card">
+        <button id="trash-button"
+          aria-label="удалить карточку"
+          type="button"
+          class="elements__card-trash button"
+        ></button>
+        <img class="elements__card-image" src="" alt="" />
+        <div class="elements__card-title-and-like">
+          <h2 class="elements__card-title"></h2>
+          <button
+            aria-label="поставить или убрать лайк"
+            type="button"
+            class="elements__card-like button"
+          ></button>
+        </div>
+      </li>
+    </template>
     <script src="./functional/index.js"></script>
   </body>
 </html>

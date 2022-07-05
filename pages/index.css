@@ -13,6 +13,9 @@
 @import url(./../blocks/popup/__input/popup__input.css);
 @import url(./../blocks/popup/__submit-button/popup__submit-button.css);
 
+/* ? подключаем повторяющиюся кнопку */
+@import url(./../blocks/button/button.css);
+
 /*!  подключаем page */
 @import url(./../blocks/page/page.css);
 
@@ -40,6 +43,7 @@
 @import url(./../blocks/elements/elements.css);
 @import url(./../blocks/elements/__list-cards/elements__list-cards.css);
 @import url(./../blocks/elements/__card/elements__card.css);
+@import url(./../blocks/elements/__card-trash/elements__card-trash.css);
 @import url(./../blocks/elements/__card-image/elements__card-image.css);
 @import url(./../blocks/elements/__card-title-and-like/elements__card-title-and-like.css);
 @import url(./../blocks/elements/__card-title/elements__card-title.css);
