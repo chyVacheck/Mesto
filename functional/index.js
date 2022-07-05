@@ -162,7 +162,7 @@ let initialCards = [
   },
   {
     name: 'Одесса',
-    link: './images/cards/Odessa-beach.jpg',
+    link: './images/cards/OdessaBeach.jpg',
     alt: 'Красивый одесский пляж'
   }
 ]
