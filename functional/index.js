@@ -86,15 +86,15 @@ function addNewCard(listOfCard = initialCards, i = listOfCard.length - 1) {
   cardTitle.textContent = listOfCard[i].name;
   elementsListCard.append(card);
 
-    // ! поменять имя функции
-  cardLikeButton.addEventListener('click', function bebe1(evt) {
-    cardLikeButton.classList.toggle('elements__card-like_active'); // не меняется цвет 
+
+  cardLikeButton.addEventListener('click', () => {
+    cardLikeButton.classList.toggle('elements__card-like_active');
   });
 
-  // !  и тут тоже поменять имя функции
-  // если нажимают кнопку удалить, то удаляем именно эту карточку
-  cardTrashButton.addEventListener('click', function bebe(evt) {
-    console.log(cardImage.src);
+
+  cardTrashButton.addEventListener('click', () => {
+    const listItem = cardTrashButton.closest('.elements__card');
+    listItem.remove();
   }); 
 }
 
@@ -125,8 +125,6 @@ function formSubmitHandler(evt) {
   profileNickname.textContent = popupInputNickname.value;
   profileDescription.textContent = popupInputDescription.value;
 }
-
-
 
 // слушатели на нажатие мышью, для открытия и закрытия поп-апа
 profileEditButton.addEventListener('click', openPopup);
