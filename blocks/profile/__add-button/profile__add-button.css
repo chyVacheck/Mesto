@@ -20,8 +20,3 @@
     max-width: 336px;
   }
 }
-
-/*? При наведении небольшое затемнение */
-.profile__add-button:hover {
-  opacity: 0.6;
-}
