@@ -26,57 +26,35 @@
         <div class="profile__info">
           <div class="profile__nick-and-button">
             <h1 class="profile__nickname">Жак-Ив Кусто</h1>
-            <button aria-label="открытие редактирования профиля" type="button" class="profile__edit-button"></button>
+            <button
+              aria-label="открытие редактирования профиля"
+              type="button"
+              class="profile__edit-button button"
+            ></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button aria-label="открытие добавление новой карточки" type="button" class="profile__add-button"></button> <!--? пока что нет скрипта для этого -->
+        <button
+          aria-label="открытие добавление новой карточки"
+          type="button"
+          class="profile__add-button button"
+        ></button>
+        <!--? пока что нет скрипта для этого -->
       </section>
       <!-- todo секция elements-->
       <section class="elements">
-        <ul class="elements__list-cards">
-        </ul>
+        <ul class="elements__list-cards"></ul>
       </section>
     </main>
     <!--  ! подвал сайта, блок footer -->
     <footer class="footer" lang="en"><p>© 2020 Mesto Russia</p></footer>
 
-    <!--  ! popupы сайта -->
-    <!-- todo popup редактировать профиль -->
-    <div class="popup">
-      <div class="popup__container">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="edit-form" id="popup__form">
-          <input
-            name="nickname"
-            class="popup__input"
-            value="Жак-Ив Кусто"
-            id="input-nickname"
-          />
-          <input
-            name="description"
-            class="popup__input"
-            value="Исследователь океана"
-            id="input-description"
-          />
-          <button type="submit" class="popup__submit-button button">
-            Сохранить
-          </button>
-        </form>
-
-        <button
-          aria-label="закрыть окно поп-апа"
-          type="button"
-          class="popup__close-button button"
-        ></button>
-      </div>
-    </div>
-
     <!--  ! templates сайта -->
     <!-- todo template для карточек -->
     <template id="templateCard">
       <li class="elements__card">
-        <button id="trash-button"
+        <button
+          id="trash-button"
           aria-label="удалить карточку"
           type="button"
           class="elements__card-trash button"
@@ -92,6 +70,31 @@
         </div>
       </li>
     </template>
+    <!-- todo template для pop-up -->
+    <template id="templatePop-up">
+      <div id="" class="popup">
+        <div class="popup__container">
+          <h2 class="popup__title"></h2>
+          <form name="edit-form" id="popup__form">
+            <input name="name" class="popup__input" id="input-name" />
+            <input name="description" class="popup__input" id="input-info" />
+            <button
+              type="submit"
+              id="button-submite"
+              class="popup__submit-button button"
+            ></button>
+          </form>
+
+          <button
+            aria-label="закрыть окно поп-апа"
+            type="button"
+            class="popup__close-button button"
+          ></button>
+        </div>
+      </div>
+    </template>
+
+    <!--  ! скрипты -->
     <script src="./functional/index.js"></script>
   </body>
 </html>

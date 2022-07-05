@@ -15,61 +15,136 @@ let page = document.querySelector('.page');
 let content = page.querySelector('.content');
 //todo let footer = page.querySelector('.footer');
 
-//* pop-up
-let popup = document.querySelector('.popup');
-let popupCloseButton = popup.querySelector('.popup__close-button');
-let popupSubmitButton = popup.querySelector('.popup__submit-button');
-let popupForm = popup.querySelector('#popup__form');
-let popupInputNickname = popupForm.querySelector('#input-nickname');
-let popupInputDescription = popupForm.querySelector('#input-description');
-
 //* template
-let templateCard = document.querySelector('#templateCard').content;
+const templateCard = page.querySelector('#templateCard').content;
+const templatePopup = page.querySelector('#templatePop-up').content;
 
 //* profile
-let profile = content.querySelector('.profile');
-let profileInfo = profile.querySelector('.profile__info');
+const profile = content.querySelector('.profile');
+const profileInfo = profile.querySelector('.profile__info');
 let profileNickname = profileInfo.querySelector('.profile__nickname');
 let profileDescription = profileInfo.querySelector('.profile__description');
 
-let profileEditButton = profileInfo.querySelector('.profile__edit-button');
-//todo let profileAddButton = profile.querySelector('.profile__add-button');
+const profileEditButton = profileInfo.querySelector('.profile__edit-button');
+const profileAddButton = profile.querySelector('.profile__add-button');
+
+//* pop-up
+const popup = page.querySelector('.popup');
+
+const popupEdit = templatePopup.cloneNode(true);
+const popupAdd = templatePopup.cloneNode(true);
+popupEdit.querySelector('.popup').id = 'edit-popup';
+popupAdd.querySelector('.popup').id = 'add-popup';
+let popupEditTitle = popupEdit.querySelector('.popup__title');
+let popupAddTitle = popupAdd.querySelector('.popup__title');
+popupEditTitle.textContent = 'Редактировать профиль';
+popupAddTitle.textContent = 'Новое место';
+const popupEditForm = popupEdit.querySelector('#popup__form');
+const popupAddForm = popupAdd.querySelector('#popup__form');
+let popupEditFormName = popupEditForm.querySelector('#input-name');
+let popupAddFormName = popupAddForm.querySelector('#input-name');
+//! popupEditFormName.value = profileNickname.textContent;
+popupAddFormName.value = 'Название';
+let popupEditFormInfo = popupEditForm.querySelector('#input-info');
+let popupAddFormInfo = popupAddForm.querySelector('#input-info');
+//! popupEditFormInfo.value = profileDescription.textContent;
+popupAddFormInfo.value = 'Ссылка на картинку';
+const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');
+const popupAddFormButtonSubmite = popupAdd.querySelector('#button-submite');
+const popupEditCloseButton = popupEdit.querySelector('.popup__close-button');
+const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
+
+
+page.append(popupEdit);
+page.append(popupAdd);
+
+profileEditButton.addEventListener('click', () => {
+  popupEditFormName.value = profileNickname.textContent;
+  popupEditFormInfo.value = profileDescription.textContent;
+  openPopup('#edit-popup', popupEditFormName.value, popupEditFormInfo.value, 'Сохранить');
+});
+
+profileAddButton.addEventListener('click', () => {
+  openPopup('#add-popup', popupAddFormName.value, popupAddFormInfo.value, 'Создать');
+});
+
+popupEditCloseButton.addEventListener('click', () => {
+  closePopup('#edit-popup');
+});
+
+popupAddCloseButton.addEventListener('click', () => {
+  closePopup('#add-popup');
+});
+
+popupEditForm.addEventListener('submit', formSubmitHandler);
+
+// размещение инфы из inputov, в профиль
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  let popupEditFormName = popupEditForm.querySelector('#input-name');
+  let popupEditFormInfo = popupEditForm.querySelector('#input-info');
+
+  profileNickname.textContent = popupEditFormName.value;
+  profileDescription.textContent = popupEditFormInfo.value;
+  closePopup('#edit-popup');
+}
+
+// открытие pop-up
+function openPopup(idOfPopup, name, info, submite) {
+  const popup = document.querySelector(idOfPopup);
+  popup.querySelector('#input-name').value = name;
+  popup.querySelector('#input-info').value = info;
+  popup.querySelector('#button-submite').textContent = submite;
+
+  popup.classList.add('popup_opened');
+}
+
+// закрытие pop-up
+function closePopup(idOfPopup) {
+  const popup = document.querySelector(idOfPopup);
+  popup.classList.remove('popup_opened');
+}
 
 //* elements
-let elements = content.querySelector('.elements');
-let elementsListCard = elements.querySelector('.elements__list-cards');
-let ElementsCardArray = elementsListCard.querySelectorAll('.elements__card'); //? псевдомассив карточек
-ElementsCardArray = Array.from(ElementsCardArray); //? массив карточек
+const elements = content.querySelector('.elements');
+const elementsListCard = elements.querySelector('.elements__list-cards');
 
 //? cписок информации для всех карточек
 const initialCards = [
   {
     name: 'Карачаевск',
-    link: './images/cards/Karachaevsk.png'
+    link: './images/cards/Karachaevsk.png',
+    alt: 'Карачаевск'
   },
   {
     name: 'Золотые ворота',
-    link: './images/cards/gold_gate.png'
+    link: './images/cards/gold_gate.png',
+    alt: 'Величественные Золотые ворота в Киеве'
   },
   {
     name: 'Карпаты',
-    link: './images/cards/Karpatu.jpg'
+    link: './images/cards/Karpatu.jpg',
+    alt: 'Красивый гора Карпаты'
   },
   {
     name: 'Домбай',
-    link: './images/cards/Dombay.jpg'
+    link: './images/cards/Dombay.jpg',
+    alt: 'Домбай просто Домбай'
   },
   {
     name: 'Гора Эльбрус',
-    link: './images/cards/Gora_Elbrus.jpg'
+    link: './images/cards/Gora_Elbrus.jpg',
+    alt: 'Красивая гора Эльбрус'
   },
   {
     name: 'Франция',
-    link: './images/cards/Franch.jpg'
+    link: './images/cards/Franch.jpg',
+    alt: 'Знаменитая эльфеева башня'
   },
   {
     name: 'Одесса',
-    link: './images/cards/Odessa-beach.jpg'
+    link: './images/cards/Odessa-beach.jpg',
+    alt: 'Красивый одесский пляж'
   }
 ]
 
@@ -83,14 +158,13 @@ function addNewCard(listOfCard = initialCards, i = listOfCard.length - 1) {
   let cardTrashButton = card.querySelector('#trash-button');
   let cardLikeButton = card.querySelector('.elements__card-like');
   cardImage.src = listOfCard[i].link;
+  cardImage.alt = listOfCard[i].alt;
   cardTitle.textContent = listOfCard[i].name;
   elementsListCard.append(card);
-
 
   cardLikeButton.addEventListener('click', () => {
     cardLikeButton.classList.toggle('elements__card-like_active');
   });
-
 
   cardTrashButton.addEventListener('click', () => {
     const listItem = cardTrashButton.closest('.elements__card');
@@ -102,33 +176,3 @@ function addNewCard(listOfCard = initialCards, i = listOfCard.length - 1) {
 for (let i = 0; i < initialCards.length; i++) {
   addNewCard(initialCards, i);
 };
-
-// открытие поп-апа
-function openPopup() {
-  popupInputNickname.value = profileNickname.textContent;
-  popupInputDescription.value = profileDescription.textContent;
-
-  popup.classList.add('popup_opened');
-}
-
-// закрытие поп-апа
-function closePopup() {
-  popup.classList.remove('popup_opened');
-}
-
-// размещение инфы из inputov, в профиль
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  let popupInputNickname = popupForm.querySelector('#input-nickname');
-  let popupInputDescription = popupForm.querySelector('#input-description');
-
-  profileNickname.textContent = popupInputNickname.value;
-  profileDescription.textContent = popupInputDescription.value;
-}
-
-// слушатели на нажатие мышью, для открытия и закрытия поп-апа
-profileEditButton.addEventListener('click', openPopup);
-popupCloseButton.addEventListener('click', closePopup);
-
-// слушатели на submit
-popupForm.addEventListener('submit', formSubmitHandler);
