@@ -24,7 +24,7 @@ const popupEditForm = popupEdit.querySelector('#edit-popup-form');
 let popupEditFormName = popupEditForm.querySelector('#edit-input-name');
 let popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
 const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');  //button
-const popupEditButton = popupEdit.querySelector('#edit-button-close');
+const popupEditButtonClose = popupEdit.querySelector('#edit-button-close');
 
 //* pop-up Add
 const popupAdd = page.querySelector('#add-popup');
