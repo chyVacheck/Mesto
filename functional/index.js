@@ -91,7 +91,7 @@ function createCard(name, link){
   let cardName = card.querySelector('.elements__card-title');
   cardName.textContent = name;
 
-  // обьявляем константы (кнопки: удаления, лайка)
+  // обьявляем константы (кнопки: удаления, картинки, лайка)
   const cardButtonTrash = card.querySelector('#button-trash');
   const cardButtonImage = card.querySelector('.elements__card-image-button');
   const cardButtonLike = card.querySelector('.elements__card-like');
@@ -103,16 +103,15 @@ function createCard(name, link){
   });
   // слушатель на кнопку-картинку
   cardButtonImage.addEventListener('click', () =>{
+    // меняем значения в pop-up на значения нашей карточки
     popupCardImage.src = cardImage.src;
     popupCardTitle.textContent = cardName.textContent;
     openPopup(popupCard);
   });
-
   // слушатель на кнопку лайка
   cardButtonLike.addEventListener('click', () => {
     cardButtonLike.classList.toggle('elements__card-like_active');
   });
-
   return card;
 }
 // добавленик карточки в список
