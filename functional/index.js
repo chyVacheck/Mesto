@@ -149,15 +149,6 @@ popupEditForm.addEventListener('submit', formSubmitForPopupEdit);
 // слушатель на submit в popup добавлении карточки
 popupAddForm.addEventListener('submit', formSubmitForPopupAdd);
 
-// открытие карточки на весь экран
-function openPopupCard(imageSrc, title) {
-  const popup = document.querySelector('#card-popup');
-  popupCardImage.src = imageSrc;
-  popupCardTitle.textContent = title;
-
-  popup.classList.add('popup_opened');
-}
-
 //*загружаем на сайт карточки
 initialCards.forEach(function (item) {
   const card = createCard(item.name, item.link);
