@@ -1,14 +1,3 @@
-// хочу сразу сказать ревьюеру: Дорогой челок, коментарии внизу я написал, больше себе, что бы не
-// отходить от такого типа коментирования, и попытаться внедрить его е себе в жизнь, так что это не попытка
-// общения с Вами, с целью сделать свою работу легче или как-то считерить, или что-то подобное, надеюсь это не доставит Вам неудобств :)
-
-
-//*     для обозначения того, что мы делаем 100% (вне зависимости от действий пользователя код будет выполнен)
-//*     объявления переменных какого-то блока (напрмер в шапке есть заголовок текст и еще что-то, они будут обьявлены под "//* header" )
-//      для обозначения функций, который могут использоваться, а могут и не использоваться (зависит от пользователя)
-//      объявления массивов
-//?     какие-то пояснения к функциям, или переменным (не потому что я тупой, а потому что так легче)
-
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 
@@ -20,9 +9,9 @@ const profile = content.querySelector('.profile');
 const profileInfo = profile.querySelector('.profile__info');
 let profileNickname = profileInfo.querySelector('.profile__nickname');
 let profileDescription = profileInfo.querySelector('.profile__description');
-
-const profileEditButton = profileInfo.querySelector('.profile__edit-button');
-const profileAddButton = profile.querySelector('.profile__add-button');
+// all buttons in profile
+const profileEditButton = profileInfo.querySelector('.profile__edit-button'); //button
+const profileAddButton = profile.querySelector('.profile__add-button');       //button
 
 //* elements
 const elements = content.querySelector('.elements');
@@ -34,8 +23,8 @@ const popupEdit = page.querySelector('#edit-popup');
 const popupEditForm = popupEdit.querySelector('#edit-popup-form');
 let popupEditFormName = popupEditForm.querySelector('#edit-input-name');
 let popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
-const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');
-const popupEditCloseButton = popupEdit.querySelector('#edit-button-close');
+const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');  //button
+const popupEditButton = popupEdit.querySelector('#edit-button-close');
 
 //* pop-up Add
 const popupAdd = page.querySelector('#add-popup');
@@ -44,45 +33,79 @@ let popupAddFormName = popupAddForm.querySelector('#add-input-name');
 popupAddFormName.value = 'Название';
 let popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
 popupAddFormInfo.value = 'Ссылка на картинку';
-const popupAddFormButtonSubmite = popupAdd.querySelector('#add-button-submite');
-const popupAddCloseButton = popupAdd.querySelector('#add-button-close');
+const popupAddFormButtonSubmite = popupAdd.querySelector('#add-button-submite');//button
+const popupAddButtonClose = popupAdd.querySelector('#add-button-close');        //button
 
 //* pop-up Card
 const popupCard = page.querySelector('#card-popup');
 let popupCardImage = popupCard.querySelector('.popup__card-image');
 let popupCardTitle = popupCard.querySelector('.popup__card-title');
-const popupCardCloseButton = popupCard.querySelector('#card-button-close');
+const popupCardButtonClose = popupCard.querySelector('#card-button-close');     //button
 
+// append pop-up to page
 page.append(popupEdit);
 page.append(popupAdd);
 page.append(popupCard);
 
-// функция по открытию popup
+/**
+ * Добавляет модификатор к DOM элементу
+ *
+ * @param {DOM елемент} popup DOM элемент, которому необходимо добавить модификатор
+ */ 
 function openPopup(popup) {
   popup.classList.add('popup_opened')
 }
-// функция по закрытию popup
+
+/**
+ * Убирает модификатор к DOM элементу
+ *
+ * @param {DOM елемент} popup DOM элемент, у которого необходимо убрать модификатор
+ */ 
 function closePopup(popup) {
   popup.classList.remove('popup_opened')
 }
-// функция подтверждения в popup-edit
+
+/**
+ * Сохраняет данные из form в popup-edit и перезаписывает их profile
+ * После чего закрывает popup-edit
+ * 
+ * @param {вроде как сам элемент} evt 
+ */ 
 function formSubmitForPopupEdit(evt) {
   evt.preventDefault();
+  //обновляем значение form, для получения новых значений 
   popupEditFormName = popupEditForm.querySelector('#edit-input-name');
   popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
-
+  //перезаписываем значения в profileIndo взятое из popupEditForm...
   profileNickname.textContent = popupEditFormName.value;
   profileDescription.textContent = popupEditFormInfo.value;
   closePopup(popupEdit);
 }
-// функция подтверждения в popup-add
+
+/**
+ * Сохраняет данные из form в popup-add и создает card
+ * после чего передает card в функцию renderCard()
+ * после чего закрывает popup-add
+ * 
+ * @param {DOM} evt //не уверен, что это DOM
+ */ 
 function formSubmitForPopupAdd(evt) {
   evt.preventDefault();
+  //создаем карточку для добавления
   const card = createCard(popupAddFormName.value, popupAddFormInfo.value);
   renderCard(card, elementsListCard);
   closePopup(popupAdd);
 }
-// создание карточки
+
+/**
+ * Создает карточку
+ * после чего передает card в функцию renderCard()
+ * после чего закрывает popup-add
+ * @param {string} name - имя изображения в карточки
+ * @param {string} link - ссылка на изображение необходимое для карточки
+ * 
+ * @return {DOM} card - готовая карточка
+ */
 function createCard(name, link){
   const card = templateCard.cloneNode(true);
   // обьявляем переменные (имя и картинка)
@@ -114,13 +137,20 @@ function createCard(name, link){
   });
   return card;
 }
-// добавленик карточки в список
+
+/**
+ * Добавляет карточку card в conteiner
+ * причем добавляет на первое место
+ * @param {DOM} card - готовая карточка 
+ * @param {string} conteiner - псевдомассив
+ */
 function renderCard(card, conteiner){
   conteiner.prepend(card);
 }
 
 // слушатель на кнопку редактирования профиля
 profileEditButton.addEventListener('click', () => {
+  //записываем в editFormInput значение из profile
   popupEditFormName.value = profileNickname.textContent;
   popupEditFormInfo.value = profileDescription.textContent;
   openPopup(popupEdit);
@@ -132,15 +162,15 @@ profileAddButton.addEventListener('click', () => {
   openPopup(popupAdd);
 });
 // слушатель на кнопку закрытия popup редактирования
-popupEditCloseButton.addEventListener('click', () => {
+popupEditButtonClose.addEventListener('click', () => {
   closePopup(popupEdit);
 });
 // слушатель на кнопку закрытия popup создания
-popupAddCloseButton.addEventListener('click', () => {
+popupAddButtonClose.addEventListener('click', () => {
   closePopup(popupAdd);
 });
 // слушатель на кнопку закрытия popup карточки
-popupCardCloseButton.addEventListener('click', () => {
+popupCardButtonClose.addEventListener('click', () => {
   closePopup(popupCard);
 });
 
