@@ -31,27 +31,27 @@ const elementsListCard = elements.querySelector('.elements__list-cards');
 
 //* pop-up Edit
 const popupEdit = page.querySelector('#edit-popup');
-const popupEditForm = popupEdit.querySelector('#popup__form');
-let popupEditFormName = popupEditForm.querySelector('#input-name');
-let popupEditFormInfo = popupEditForm.querySelector('#input-info');
+const popupEditForm = popupEdit.querySelector('#edit-popup-form');
+let popupEditFormName = popupEditForm.querySelector('#edit-input-name');
+let popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
 const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');
-const popupEditCloseButton = popupEdit.querySelector('#button-close');
+const popupEditCloseButton = popupEdit.querySelector('#edit-button-close');
 
 //* pop-up Add
 const popupAdd = page.querySelector('#add-popup');
-const popupAddForm = popupAdd.querySelector('#popup__form');
-let popupAddFormName = popupAddForm.querySelector('#input-name');
+const popupAddForm = popupAdd.querySelector('#add-popup-form');
+let popupAddFormName = popupAddForm.querySelector('#add-input-name');
 popupAddFormName.value = 'Название';
-let popupAddFormInfo = popupAddForm.querySelector('#input-info');
+let popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
 popupAddFormInfo.value = 'Ссылка на картинку';
-const popupAddFormButtonSubmite = popupAdd.querySelector('#button-submite');
-const popupAddCloseButton = popupAdd.querySelector('#button-close');
+const popupAddFormButtonSubmite = popupAdd.querySelector('#add-button-submite');
+const popupAddCloseButton = popupAdd.querySelector('#add-button-close');
 
 //* pop-up Card
 const popupCard = page.querySelector('#card-popup');
 let popupCardImage = popupCard.querySelector('.popup__card-image');
 let popupCardTitle = popupCard.querySelector('.popup__card-title');
-const popupCardCloseButton = popupCard.querySelector('#button-close');
+const popupCardCloseButton = popupCard.querySelector('#card-button-close');
 
 page.append(popupEdit);
 page.append(popupAdd);
@@ -68,8 +68,8 @@ function closePopup(popup) {
 // функция подтверждения в popup-edit
 function formSubmitForPopupEdit(evt) {
   evt.preventDefault();
-  popupEditFormName = popupEditForm.querySelector('#input-name');
-  popupEditFormInfo = popupEditForm.querySelector('#input-info');
+  popupEditFormName = popupEditForm.querySelector('#edit-input-name');
+  popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
 
   profileNickname.textContent = popupEditFormName.value;
   profileDescription.textContent = popupEditFormInfo.value;
