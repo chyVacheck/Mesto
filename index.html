@@ -54,17 +54,18 @@
     <template id="templateCard">
       <li class="elements__card">
         <button
-          id="trash-button"
+          id="button-trash"
           aria-label="удалить карточку"
           type="button"
           class="elements__card-trash button"
         ></button>
         <button class="elements__card-image-button">
-          <img class="elements__card-image"/>
+          <img class="elements__card-image" />
         </button>
         <div class="elements__card-title-and-like">
           <h2 class="elements__card-title"></h2>
           <button
+            if="button-like"
             aria-label="поставить или убрать лайк"
             type="button"
             class="elements__card-like button"
@@ -72,46 +73,72 @@
         </div>
       </li>
     </template>
-    <!-- todo template для pop-up form -->
-    <template id="templatePop-upForm">
-      <div id="" class="popup">
-        <div class="popup__container">
-          <h2 class="popup__title"></h2>
-          <form name="edit-form" id="popup__form">
-            <input name="name" class="popup__input" id="input-name" />
-            <input name="description" class="popup__input" id="input-info" />
-            <button
-              type="submit"
-              id="button-submite"
-              class="popup__submit-button button"
-            ></button>
-          </form>
-
+    <!-- todo edit pop-up -->
+    <article id="edit-popup" class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form name="edit-form" id="popup__form">
+          <input name="name" class="popup__input" id="input-name" />
+          <input name="info" class="popup__input" id="input-info" />
           <button
-            aria-label="закрыть окно pop-up"
-            type="button"
-            class="popup__close-button button"
-          ></button>
-        </div>
-      </div>
-    </template>
+            type="submit"
+            id="button-submite"
+            class="popup__submit-button button"
+          >
+            Сохранить
+          </button>
+        </form>
 
-    <!-- todo template для pop-upCard -->
-    <template id="templatePop-upCard">
-      <div id="" class="popup popup_background_darknes">
-        <div class="popup__card">
-          <img class="popup__card-image" />
-          <h2 class="popup__card-title"></h2>
-          <button
-            aria-label="закрыть окно pop-up"
-            type="button"
-            class="popup__close-button button"
-          ></button>
-        </div>
+        <button
+          aria-label="закрыть окно pop-up"
+          type="button"
+          id="button-close"
+          class="popup__close-button button"
+        ></button>
       </div>
-    </template>
+    </article>
+
+    <!-- todo add pop-up -->
+    <article id="add-popup" class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form name="edit-form" id="popup__form">
+          <input name="name" class="popup__input" id="input-name" />
+          <input name="info" class="popup__input" id="input-info" />
+          <button
+            type="submit"
+            id="button-submite"
+            class="popup__submit-button button"
+          >
+            Создать
+          </button>
+        </form>
+
+        <button
+          aria-label="закрыть окно pop-up"
+          type="button"
+          id="button-close"
+          class="popup__close-button button"
+        ></button>
+      </div>
+    </article>
+
+    <!-- todo card pop-up -->
+    <article id="card-popup" class="popup popup_background_darknes">
+      <div class="popup__card">
+        <img class="popup__card-image" />
+        <h2 class="popup__card-title"></h2>
+        <button
+          aria-label="закрыть окно pop-up"
+          type="button"
+          id="button-close"
+          class="popup__close-button button"
+        ></button>
+      </div>
+    </article>
 
     <!--  ! скрипты -->
+    <script src="./functional/constants.js"></script>
     <script src="./functional/index.js"></script>
   </body>
 </html>
