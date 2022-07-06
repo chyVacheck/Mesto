@@ -17,7 +17,8 @@ let content = page.querySelector('.content');
 
 //* template
 const templateCard = page.querySelector('#templateCard').content;
-const templatePopup = page.querySelector('#templatePop-up').content;
+const templatePopupForm = page.querySelector('#templatePop-upForm').content;
+const templatePopupCard = page.querySelector('#templatePop-upCard').content;
 
 //* profile
 const profile = content.querySelector('.profile');
@@ -28,40 +29,50 @@ let profileDescription = profileInfo.querySelector('.profile__description');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
 const profileAddButton = profile.querySelector('.profile__add-button');
 
-//* pop-up
-const popup = page.querySelector('.popup');
-
-const popupEdit = templatePopup.cloneNode(true);
-const popupAdd = templatePopup.cloneNode(true);
+//* pop-up Edit
+const popupEdit = templatePopupForm.cloneNode(true);
 popupEdit.querySelector('.popup').id = 'edit-popup';
-popupAdd.querySelector('.popup').id = 'add-popup';
 let popupEditTitle = popupEdit.querySelector('.popup__title');
-let popupAddTitle = popupAdd.querySelector('.popup__title');
 popupEditTitle.textContent = 'Редактировать профиль';
-popupAddTitle.textContent = 'Новое место';
 const popupEditForm = popupEdit.querySelector('#popup__form');
-const popupAddForm = popupAdd.querySelector('#popup__form');
 let popupEditFormName = popupEditForm.querySelector('#input-name');
-let popupAddFormName = popupAddForm.querySelector('#input-name');
-//! popupEditFormName.value = profileNickname.textContent;
-popupAddFormName.value = 'Название';
 let popupEditFormInfo = popupEditForm.querySelector('#input-info');
-let popupAddFormInfo = popupAddForm.querySelector('#input-info');
-//! popupEditFormInfo.value = profileDescription.textContent;
-popupAddFormInfo.value = 'Ссылка на картинку';
 const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');
-const popupAddFormButtonSubmite = popupAdd.querySelector('#button-submite');
 const popupEditCloseButton = popupEdit.querySelector('.popup__close-button');
+
+//* pop-up Add
+const popupAdd = templatePopupForm.cloneNode(true);
+popupAdd.querySelector('.popup').id = 'add-popup';
+let popupAddTitle = popupAdd.querySelector('.popup__title');
+popupAddTitle.textContent = 'Новое место';
+const popupAddForm = popupAdd.querySelector('#popup__form');
+let popupAddFormName = popupAddForm.querySelector('#input-name');
+popupAddFormName.value = 'Название';
+let popupAddFormInfo = popupAddForm.querySelector('#input-info');
+popupAddFormInfo.value = 'Ссылка на картинку';
+const popupAddFormButtonSubmite = popupAdd.querySelector('#button-submite');
 const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
+
+//* pop-up Card
+const popupCard = templatePopupCard.cloneNode(true);
+popupCard.querySelector('.popup').id = 'card-popup';
+let popupCardImage = popupCard.querySelector('.popup__card-image');
+let popupCardTitle = popupCard.querySelector('.popup__card-title');
+const popupCardCloseButton = popupCard.querySelector('.popup__close-button');
 
 
 page.append(popupEdit);
 page.append(popupAdd);
+page.append(popupCard);
 
 profileEditButton.addEventListener('click', () => {
   popupEditFormName.value = profileNickname.textContent;
   popupEditFormInfo.value = profileDescription.textContent;
   openPopup('#edit-popup', popupEditFormName.value, popupEditFormInfo.value, 'Сохранить');
+});
+
+popupEditCloseButton.addEventListener('click', () => {
+  closePopup('#edit-popup');
 });
 
 profileAddButton.addEventListener('click', () => {
@@ -70,12 +81,12 @@ profileAddButton.addEventListener('click', () => {
   openPopup('#add-popup', popupAddFormName.value, popupAddFormInfo.value, 'Создать');
 });
 
-popupEditCloseButton.addEventListener('click', () => {
-  closePopup('#edit-popup');
-});
-
 popupAddCloseButton.addEventListener('click', () => {
   closePopup('#add-popup');
+});
+
+popupCardCloseButton.addEventListener('click', () => {
+  closePopup('#card-popup');
 });
 
 popupEditForm.addEventListener('submit', formSubmitHandler);
@@ -100,8 +111,7 @@ function formSubmitForCard(evt) {
 
   let card = [{
     name: popupAddFormName.value,
-    link: popupAddFormInfo.value,
-    alt: popupAddFormName.value
+    link: popupAddFormInfo.value
   }]
 
   addNewCard(card);
@@ -118,11 +128,21 @@ function openPopup(idOfPopup, name, info, submite) {
   popup.classList.add('popup_opened');
 }
 
+// открытие карточки на весь экран
+function openPopupCard(imageSrc, title) {
+  const popup = document.querySelector('#card-popup');
+  popupCardImage.src = imageSrc;
+  popupCardTitle.textContent = title;
+
+  popup.classList.add('popup_opened');
+}
+
 // закрытие pop-up
 function closePopup(idOfPopup) {
   const popup = document.querySelector(idOfPopup);
   popup.classList.remove('popup_opened');
 }
+
 
 //* elements
 const elements = content.querySelector('.elements');
@@ -132,53 +152,43 @@ const elementsListCard = elements.querySelector('.elements__list-cards');
 let initialCards = [
   {
     name: 'Карачаевск',
-    link: 'https://images.unsplash.com/photo-1588584922681-745a2223f72c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
-    alt: 'Карачаевск'
+    link: 'https://images.unsplash.com/photo-1588584922681-745a2223f72c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
   },
   {
     name: 'Байкал',
-    link: 'https://images.unsplash.com/photo-1619527441512-97d55b860d78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
-    alt: 'Байкал'
+    link: 'https://images.unsplash.com/photo-1619527441512-97d55b860d78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
   },
   {
     name: 'Карпаты',
-    link: 'https://images.unsplash.com/photo-1632087778661-26040de8b4ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
-    alt: 'Красивые Карпаты'
+    link: 'https://images.unsplash.com/photo-1632087778661-26040de8b4ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
   },
   {
     name: 'Гора Петрос',
-    link: 'https://images.unsplash.com/photo-1618380037378-6b7c28a8293a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1889&q=80',
-    alt: 'Гора Петрос, Украина'
+    link: 'https://images.unsplash.com/photo-1618380037378-6b7c28a8293a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1889&q=80'
   },
   {
     name: 'Сочи',
-    link: 'https://images.unsplash.com/photo-1605248278520-2f5370c26b8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1211&q=80',
-    alt: 'Сочи Россия'
+    link: 'https://images.unsplash.com/photo-1605248278520-2f5370c26b8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1211&q=80'
   },
   {
     name: 'Гора Эльбрус',
-    link: 'https://images.unsplash.com/photo-1626518139514-65676cf25bac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
-    alt: 'Красивая гора Эльбрус'
+    link: 'https://images.unsplash.com/photo-1626518139514-65676cf25bac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80'
   },
   {
     name: 'Обское море',
-    link: 'https://images.unsplash.com/photo-1595933868307-5a7083dfb921?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
-    alt: 'Красивый вид природы в обском море'
+    link: 'https://images.unsplash.com/photo-1595933868307-5a7083dfb921?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
   },
   {
     name: 'Одесский пляж',
-    link: 'https://images.unsplash.com/photo-1596523965234-f45cda35d1e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-    alt: 'Красивый одесский пляж'
+    link: 'https://images.unsplash.com/photo-1596523965234-f45cda35d1e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
   },
   {
     name: 'Реслпублика Карелия',
-    link: 'https://images.unsplash.com/photo-1630763741321-16e7bff61e2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    alt: 'Красивый реслпублика Карелия'
+    link: 'https://images.unsplash.com/photo-1630763741321-16e7bff61e2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
   },
   {
     name: 'Сочи',
-    link: 'https://images.unsplash.com/photo-1603787277977-0237f776f1ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
-    alt: 'Красивый вид гор в Сочи'
+    link: 'https://images.unsplash.com/photo-1603787277977-0237f776f1ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
   }
 ]
 
@@ -187,6 +197,7 @@ let initialCards = [
 // добавление новой карточки
 function addNewCard(listOfCard = initialCards, i = listOfCard.length - 1) {
   let card = templateCard.cloneNode(true);
+  let cardImageButton = card.querySelector('.elements__card-image-button');
   let cardImage = card.querySelector('.elements__card-image');
   let cardTitle = card.querySelector('.elements__card-title');
   let cardTrashButton = card.querySelector('#trash-button');
@@ -194,9 +205,12 @@ function addNewCard(listOfCard = initialCards, i = listOfCard.length - 1) {
 
   if (!(listOfCard[i].link === '') && !(listOfCard[i].link === 'Ссылка на картинку')) {
     cardImage.src = listOfCard[i].link;
-    cardImage.alt = listOfCard[i].alt;
     cardTitle.textContent = listOfCard[i].name;
     elementsListCard.prepend(card);
+
+    cardImageButton.addEventListener('click', () => {
+      openPopupCard(cardImage.src, cardTitle.textContent);
+    });
 
     cardLikeButton.addEventListener('click', () => {
       cardLikeButton.classList.toggle('elements__card-like_active');
@@ -210,7 +224,6 @@ function addNewCard(listOfCard = initialCards, i = listOfCard.length - 1) {
   else {
     alert('Для добавление карточки, необходимо вставить ссылку на картику');
   }
-  
 }
 
 //*загружаем на сайт карточки

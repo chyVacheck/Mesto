@@ -59,7 +59,9 @@
           type="button"
           class="elements__card-trash button"
         ></button>
-        <img class="elements__card-image" src="" alt="" />
+        <button class="elements__card-image-button button">
+          <img class="elements__card-image" src="" alt="" />
+        </button>
         <div class="elements__card-title-and-like">
           <h2 class="elements__card-title"></h2>
           <button
@@ -70,8 +72,8 @@
         </div>
       </li>
     </template>
-    <!-- todo template для pop-up -->
-    <template id="templatePop-up">
+    <!-- todo template для pop-up form -->
+    <template id="templatePop-upForm">
       <div id="" class="popup">
         <div class="popup__container">
           <h2 class="popup__title"></h2>
@@ -86,7 +88,22 @@
           </form>
 
           <button
-            aria-label="закрыть окно поп-апа"
+            aria-label="закрыть окно pop-up"
+            type="button"
+            class="popup__close-button button"
+          ></button>
+        </div>
+      </div>
+    </template>
+
+    <!-- todo template для pop-upCard -->
+    <template id="templatePop-upCard">
+      <div id="" class="popup">
+        <div class="popup__card">
+          <img class="popup__card-image" />
+          <h2 class="popup__card-title"></h2>
+          <button
+            aria-label="закрыть окно pop-up"
             type="button"
             class="popup__close-button button"
           ></button>
