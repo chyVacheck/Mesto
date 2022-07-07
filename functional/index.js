@@ -7,8 +7,8 @@ const templateCard = page.querySelector('#templateCard').content;
 //* profile
 const profile = content.querySelector('.profile');
 const profileInfo = profile.querySelector('.profile__info');
-let profileNickname = profileInfo.querySelector('.profile__nickname');
-let profileDescription = profileInfo.querySelector('.profile__description');
+const profileNickname = profileInfo.querySelector('.profile__nickname');
+const profileDescription = profileInfo.querySelector('.profile__description');
 // all buttons in profile
 const profileEditButton = profileInfo.querySelector('.profile__edit-button'); //button
 const profileAddButton = profile.querySelector('.profile__add-button');       //button
@@ -29,17 +29,15 @@ const popupEditButtonClose = popupEdit.querySelector('#edit-button-close');
 //* pop-up Add
 const popupAdd = page.querySelector('#add-popup');
 const popupAddForm = popupAdd.querySelector('#add-popup-form');
-let popupAddFormName = popupAddForm.querySelector('#add-input-name');
-popupAddFormName.value = 'Название';
-let popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
-popupAddFormInfo.value = 'Ссылка на картинку';
+const popupAddFormName = popupAddForm.querySelector('#add-input-name');
+const popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
 const popupAddFormButtonSubmite = popupAdd.querySelector('#add-button-submite');//button
 const popupAddButtonClose = popupAdd.querySelector('#add-button-close');        //button
 
 //* pop-up Card
 const popupCard = page.querySelector('#card-popup');
-let popupCardImage = popupCard.querySelector('.popup__card-image');
-let popupCardTitle = popupCard.querySelector('.popup__card-title');
+const popupCardImage = popupCard.querySelector('.popup__card-image');
+const popupCardTitle = popupCard.querySelector('.popup__card-title');
 const popupCardButtonClose = popupCard.querySelector('#card-button-close');     //button
 
 // append pop-up to page
@@ -109,9 +107,10 @@ function formSubmitForPopupAdd(evt) {
 function createCard(name, link){
   const card = templateCard.cloneNode(true);
   // обьявляем переменные (имя и картинка)
-  let cardImage = card.querySelector('.elements__card-image');
+  const cardImage = card.querySelector('.elements__card-image');
   cardImage.src = link;
-  let cardName = card.querySelector('.elements__card-title');
+  cardImage.alt = name;
+  const cardName = card.querySelector('.elements__card-title');
   cardName.textContent = name;
 
   // обьявляем константы (кнопки: удаления, картинки, лайка)
@@ -151,14 +150,14 @@ function renderCard(card, conteiner){
 // слушатель на кнопку редактирования профиля
 profileEditButton.addEventListener('click', () => {
   //записываем в editFormInput значение из profile
-  popupEditFormName.value = profileNickname.textContent;
-  popupEditFormInfo.value = profileDescription.textContent;
+  popupEditFormName.placeholder = profileNickname.textContent;
+  popupEditFormInfo.placeholder = profileDescription.textContent;
   openPopup(popupEdit);
 });
 // слушатель на кнопку создания новой карточки
 profileAddButton.addEventListener('click', () => {
-  popupAddFormName.value = 'Название';
-  popupAddFormInfo.value = 'Ссылка на картинку';
+  popupAddFormName.value = '';
+  popupAddFormInfo.value = '';
   openPopup(popupAdd);
 });
 // слушатель на кнопку закрытия popup редактирования

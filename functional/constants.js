@@ -1,5 +1,5 @@
 //? cписок информации для всех карточек
-let initialCards = [
+const initialCards = [
   {
     name: 'Карачаевск',
     link: 'https://images.unsplash.com/photo-1588584922681-745a2223f72c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
