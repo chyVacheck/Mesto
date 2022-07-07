@@ -17,9 +17,11 @@ const profileAddButton = profile.querySelector('.profile__add-button');       //
 const elements = content.querySelector('.elements');
 const elementsListCard = elements.querySelector('.elements__list-cards');
 
+//* pop-up
+const popup = page.querySelector('#popup')
 
 //* pop-up Edit
-const popupEdit = page.querySelector('#edit-popup');
+const popupEdit = popup.querySelector('#edit-popup');
 const popupEditForm = popupEdit.querySelector('#edit-popup-form');
 let popupEditFormName = popupEditForm.querySelector('#edit-input-name');
 let popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
@@ -27,7 +29,7 @@ const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');  
 const popupEditButtonClose = popupEdit.querySelector('#edit-button-close');
 
 //* pop-up Add
-const popupAdd = page.querySelector('#add-popup');
+const popupAdd = popup.querySelector('#add-popup');
 const popupAddForm = popupAdd.querySelector('#add-popup-form');
 const popupAddFormName = popupAddForm.querySelector('#add-input-name');
 const popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
@@ -35,32 +37,42 @@ const popupAddFormButtonSubmite = popupAdd.querySelector('#add-button-submite');
 const popupAddButtonClose = popupAdd.querySelector('#add-button-close');        //button
 
 //* pop-up Card
-const popupCard = page.querySelector('#card-popup');
+const popupCard = popup.querySelector('#card-popup');
 const popupCardImage = popupCard.querySelector('.popup__card-image');
 const popupCardTitle = popupCard.querySelector('.popup__card-title');
 const popupCardButtonClose = popupCard.querySelector('#card-button-close');     //button
 
-// append pop-up to page
-page.append(popupEdit);
-page.append(popupAdd);
-page.append(popupCard);
 
 /**
  * Добавляет модификатор к DOM элементу
  *
- * @param {DOM елемент} popup DOM элемент, которому необходимо добавить модификатор
+ * @param {DOM} popupContainer DOM элемент, которому необходимо добавить модификатор
  */ 
-function openPopup(popup) {
-  popup.classList.add('popup_opened')
+function openPopup(popupContainer) {
+  popup.classList.add('popup_opened');
+  if (popupContainer === popupCard) {
+    popup.classList.add('popup_background_darknes');
+    popupContainer.classList.add('popup__card_opened');
+  } else {
+    popupContainer.classList.add('popup__container_opened');
+  }
+  
+  
 }
 
 /**
  * Убирает модификатор к DOM элементу
  *
- * @param {DOM елемент} popup DOM элемент, у которого необходимо убрать модификатор
+ * @param {DOM} popupContainer DOM элемент, у которого необходимо убрать модификатор
  */ 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened')
+function closePopup(popupContainer) {
+  popup.classList.remove('popup_opened');
+  if (popupContainer === popupCard) {
+    popup.classList.remove('popup_background_darknes');
+    popupContainer.classList.remove('popup__card_opened');
+  } else {
+    popupContainer.classList.remove('popup__container_opened');
+  }
 }
 
 /**
