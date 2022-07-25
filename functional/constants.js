@@ -41,3 +41,10 @@ const initialCards = [
     link: 'https://images.unsplash.com/photo-1603787277977-0237f776f1ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
   }
 ]
+
+const errorMesages = {
+  tooShort: 'Ввод слишком короткий.',
+  tooLong: 'Ввод слишком длинный.',
+  typeMismatchUrl: 'Введите ссылку на изображение.',
+  valueMissing: 'Вы пропустили это поле.',
+}

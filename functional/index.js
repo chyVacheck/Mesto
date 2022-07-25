@@ -25,6 +25,7 @@ const popupEdit = popup.querySelector('#edit-popup');
 const popupEditForm = popupEdit.querySelector('#edit-popup-form');
 const popupEditFormName = popupEditForm.querySelector('#edit-input-name');
 const popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
+
 const popupEditFormButtonSubmite = popupEdit.querySelector('#button-submite');  //button
 const popupEditButtonClose = popupEdit.querySelector('#edit-button-close');
 
@@ -33,7 +34,8 @@ const popupAdd = popup.querySelector('#add-popup');
 const popupAddForm = popupAdd.querySelector('#add-popup-form');
 const popupAddFormName = popupAddForm.querySelector('#add-input-name');
 const popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
-const popupAddFormButtonSubmite = popupAdd.querySelector('#add-button-submite');//button
+
+const popupAddFormButtonSubmite = popupAdd.querySelector('#add-button-submit');//button
 const popupAddButtonClose = popupAdd.querySelector('#add-button-close');        //button
 
 //* pop-up Card
