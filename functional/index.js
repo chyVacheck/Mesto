@@ -81,8 +81,13 @@ popupAddCloseButton.addEventListener('click', () => {
 popupEditForm.addEventListener('submit', formSubmitHandler);
 popupAddForm.addEventListener('submit', formSubmitForCard);
 
-// размещение инфы из inputov, в профиль
-function formSubmitHandler(evt) {
+/**
+ * Сохраняет данные из form в popup-edit и перезаписывает их profile
+ * После чего закрывает popup-edit
+ * 
+ * @param {вроде как сам элемент} evt 
+ */ 
+function submitFormForPopupEdit(evt) {
   evt.preventDefault();
   let popupEditFormName = popupEditForm.querySelector('#input-name');
   let popupEditFormInfo = popupEditForm.querySelector('#input-info');
@@ -92,8 +97,14 @@ function formSubmitHandler(evt) {
   closePopup('#edit-popup');
 }
 
-// добавление новой карточки
-function formSubmitForCard(evt) {
+/**
+ * Сохраняет данные из form в popup-add и создает card
+ * после чего передает card в функцию renderCard()
+ * после чего закрывает popup-add
+ * 
+ * @param {DOM} evt //не уверен, что это DOM
+ */ 
+function submitFormForPopupAdd(evt) {
   evt.preventDefault();
   let popupAddFormName = popupAddForm.querySelector('#input-name');
   let popupAddFormInfo = popupAddForm.querySelector('#input-info');
@@ -197,6 +208,44 @@ function addNewCard(listOfCard = initialCards, i = listOfCard.length - 1) {
   }
   
 }
+
+// слушатель на кнопку редактирования профиля
+profileEditButton.addEventListener('click', () => {
+  //записываем в editFormInput значение из profile
+  popupEditFormName.placeholder = profileNickname.textContent;
+  popupEditFormInfo.placeholder = profileDescription.textContent;
+  popupEdit.classList.add('popup__container_opened');
+  openPopup(popup);
+  enableTap();
+});
+// слушатель на кнопку создания новой карточки
+profileAddButton.addEventListener('click', () => {
+  popupAddForm.reset();
+  popupAdd.classList.add('popup__container_opened');
+  openPopup(popup);
+  enableTap();
+});
+// слушатель на кнопку закрытия popup редактирования
+popupEditButtonClose.addEventListener('click', () => {
+  popupEdit.classList.remove('popup__container_opened');
+  closePopup(popup);
+});
+// слушатель на кнопку закрытия popup создания
+popupAddButtonClose.addEventListener('click', () => {
+  popupAdd.classList.remove('popup__container_opened');
+  closePopup(popup);
+});
+// слушатель на кнопку закрытия popup карточки
+popupCardButtonClose.addEventListener('click', () => {
+  popup.classList.remove('popup_background_darknes');
+  popupCard.classList.remove('popup__card_opened');
+  closePopup(popup);
+});
+
+// слушатель на submit в popup редактирования
+popupEditForm.addEventListener('submit', submitFormForPopupEdit);
+// слушатель на submit в popup добавлении карточки
+popupAddForm.addEventListener('submit', submitFormForPopupAdd);
 
 //*загружаем на сайт карточки
 for (let i = 0; i < initialCards.length; i++) {
