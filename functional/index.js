@@ -133,6 +133,7 @@ function createCard(name, link){
     popup.classList.add('popup_background_darknes');
     popupCard.classList.add('popup__card_opened');
     openPopup(popup);
+    enableTap();
   });
   // слушатель на кнопку лайка
   cardButtonLike.addEventListener('click', () => {
@@ -151,6 +152,65 @@ function renderCard(card, container){
   container.prepend(card);
 }
 
+/**Включает слушатели на нажатие кнопки esc или клика мыши
+ * 
+ */
+ function enableTap() {
+
+  //слушатель на нажатие мыши
+  popup.addEventListener('click', closeFromClick);
+
+  //слушатель на кнопку Esc
+  window.addEventListener('keydown', closeFromEscape);
+ }
+
+ /**
+ * Закрывает popup и открытый в нем контейнер
+ * @param {event} event - event
+ * @param {DOM} popup - popup для закрытия
+ * @param {DOM} popupContainer - контейнер для закрытия
+ * @param {string} opened - модификатор контейнера отвечающий за открытие
+ */
+function closePopupAndContaiters(event) {
+  const popup = page.querySelector('#popup')
+  
+  const popupEdit = popup.querySelector('#edit-popup');
+  const popupAdd = popup.querySelector('#add-popup');
+  const popupCard = popup.querySelector('#card-popup');
+
+  popupEdit.classList.remove('popup__container_opened');
+  popupAdd.classList.remove('popup__container_opened');
+  popupCard.classList.remove('popup__card_opened');
+
+  popup.classList.remove('popup_background_darknes');
+
+  closePopup(popup);
+
+  window.removeEventListener('keydown', closeFromEscape);
+  popup.removeEventListener('click', closeFromClick);
+}
+
+/**
+ * Вызывает функцию закрытия popup через нажатие конопки esc
+ * @param {event} event - event
+ */
+function closeFromEscape (event) {
+  if (event.key === 'Escape') {
+    closePopupAndContaiters();
+  }
+}
+
+/**
+ * Вызывает функцию закрытия popup через клик мышей вне контейнера
+ * @param {event} event - event
+ */
+function closeFromClick (event) {
+  const popup = page.querySelector('#popup')
+  if (event.target === popup) {
+    closePopupAndContaiters();
+  }
+}
+
 // слушатель на кнопку редактирования профиля
 profileEditButton.addEventListener('click', () => {
   //записываем в editFormInput значение из profile
@@ -158,12 +218,14 @@ profileEditButton.addEventListener('click', () => {
   popupEditFormInfo.placeholder = profileDescription.textContent;
   popupEdit.classList.add('popup__container_opened');
   openPopup(popup);
+  enableTap();
 });
 // слушатель на кнопку создания новой карточки
 profileAddButton.addEventListener('click', () => {
   popupAddForm.reset();
   popupAdd.classList.add('popup__container_opened');
   openPopup(popup);
+  enableTap();
 });
 // слушатель на кнопку закрытия popup редактирования
 popupEditButtonClose.addEventListener('click', () => {
