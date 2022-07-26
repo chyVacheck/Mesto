@@ -48,3 +48,6 @@ const errorMesages = {
   typeMismatchUrl: 'Введите ссылку на изображение.',
   valueMissing: 'Вы пропустили это поле.',
 }
+
+const modificationPopupOpened = '.popup_opened';
+const classPopupButtonClose = '.popup__close-button';

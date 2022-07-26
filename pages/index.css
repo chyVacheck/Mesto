@@ -8,11 +8,9 @@
 @import url(./../blocks/popup/popup.css);
 @import url(./../blocks/popup/_opened/popup_opened.css);                                  /** модификатор */
 @import url(./../blocks/popup/__card/popup__card.css);
-@import url(./../blocks/popup/__card/_opened/popup__card_opened.css);                     /** модификатор */
 @import url(./../blocks/popup/__card-image/popup__card-image.css);
 @import url(./../blocks/popup/__card-title/popup__card-title.css);
 @import url(./../blocks/popup/__container/popup__container.css);
-@import url(./../blocks/popup/__container/_opened/popup__container_opened.css);           /** модификатор */
 @import url(./../blocks/popup/__close-button/popup__close-button.css);
 @import url(./../blocks/popup/__title/popup__title.css);
 @import url(./../blocks/popup/__field/popup__field.css);

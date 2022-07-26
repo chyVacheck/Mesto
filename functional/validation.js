@@ -1,23 +1,28 @@
 const formAdd = {
-  form: '#add-popup-form',
-  button: '#add-button-submit',
+  formSelector: '#add-popup-form',
+  button: 'button',
+  submitButtonSelector: '#add-button-submit',
+  buttonValid: 'popup__submit-button_valid',
+  buttonInValid: 'popup__submit-button_invalid',
 };
 
 const formEdit = {
-  form: '#edit-popup-form',
-  button: '#button-submit',
+  formSelector: '#edit-popup-form',
+  button: 'button',
+  submitButtonSelector: '#button-submit',
+  buttonValid: 'popup__submit-button_valid',
+  buttonInValid: 'popup__submit-button_invalid',
 }
-
 
 function enableValidation(config) {
   // находим нужную форму
-  const form = document.querySelector(config.form);
+  const form = document.querySelector(config.formSelector);
   // навешиваем на нее слушатель submit
-  form.addEventListener('submit', handleFormSubmit);
+  form.addEventListener('submit', (event) => handleFormSubmit(event, config));
   form.addEventListener('input', (event) => handleFormInput(event, config));
 };
 
-function handleFormSubmit(event){
+function handleFormSubmit(event, config){
   //отменяем отправку
   event.preventDefault();
   //опредлеить валидна ли форма
@@ -26,11 +31,9 @@ function handleFormSubmit(event){
   const isValid = form.checkValidity();
   //вывести в console
   if (isValid) {
-    console.log('Форма полностью валидна');
     //если форма валидна, то сбросить ее
     form.reset();
-  } else {
-    console.log('Форма не валидна, есть ошибки');
+    setSubmitButtonState(form, config);
   }
 }
 
@@ -38,34 +41,10 @@ function handleFormInput(event, config){
   const input = event.target;
   const form = event.currentTarget;
 
-  //установить свои тексты ошибок
-  setCustomError(input);
   //показывать эти ошибки под полем
   showFieldError(input);
   //включить или выключить кнопку отправки формы
   setSubmitButtonState(form, config);
-}
-
-function setCustomError(input) {
-  const validity = input.validity;
-
-  input.setCustomValidity(error = '');
-
-  if (validity.tooShort) {
-    input.setCustomValidity(error = errorMesages.tooShort);
-  }
-  // в реальной жизни браузер не дает написать больше текста, чем максимальное количество
-  if (validity.tooLong) {
-    input.setCustomValidity(error = errorMesages.tooLong);
-  }
-
-  if (validity.typeMismatch && input.type === 'url') {
-    input.setCustomValidity(error = errorMesages.typeMismatchUrl);
-  }
-
-  if (validity.valueMissing) {
-    input.setCustomValidity(error = errorMesages.valueMissing);
-  }
 }
 
 function showFieldError(input) {
@@ -74,24 +53,22 @@ function showFieldError(input) {
 }
 
 function setSubmitButtonState(form, config){
-  const button = form.querySelector(config.button);
+  const button = form.querySelector(config.submitButtonSelector);
   const isValid = form.checkValidity();
 
   if (isValid) {
-    button.removeAttribute(qualifiedName = 'disabled', false);
-    button.classList.remove('popup__submit-button_invalid');
-    button.classList.add('popup__submit-button_valid');
-    button.classList.add('button');
+    button.removeAttribute(qualifiedName = 'disabled');
+    button.classList.remove(config.buttonInValid);
+    button.classList.add(config.buttonValid);
+    button.classList.add(config.button);
   } else {
-    button.setAttribute(qualifiedName = 'disabled', true);
-    button.classList.add('popup__submit-button_invalid');
-    button.classList.remove('popup__submit-button_valid');
-    button.classList.remove('button');
+    button.setAttribute(qualifiedName = 'disabled', value = true);
+    button.classList.add(config.buttonInValid);
+    button.classList.remove(config.buttonValid);
+    button.classList.remove(config.button);
   }
 
 }
-
-
 
 enableValidation(formAdd);
 enableValidation(formEdit);

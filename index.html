@@ -2,7 +2,13 @@
 <html lang="ru">
   <!-- * голова -->
   <head>
+    <!--  ! стили -->
     <link rel="stylesheet" href="./pages/index.css" />
+    <!--  ! скрипты -->
+    <script defer src="./functional/constants.js"></script>
+    <script defer src="./functional/index.js"></script>
+    <script defer src="./functional/validation.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale = 1" />
     <meta charset="UTF-8" />
     <title>Mesto</title>
@@ -50,8 +56,8 @@
     <footer class="footer" lang="en"><p>© 2020 Mesto Russia</p></footer>
 
     <!--  ! templates сайта -->
-    <!-- todo template для карточек -->
-    <template id="templateCard">
+    <!-- * template для карточек -->
+    <template id="template-сard">
       <li class="elements__card">
         <button
           id="button-trash"
@@ -75,9 +81,10 @@
     </template>
 
     <!--  ! pop-up сайта -->
-    <section id="popup" class="popup">
-      <!-- todo edit pop-up -->
-      <article id="edit-popup" class="popup__container">
+
+    <!-- * edit pop-up -->
+    <section id="popup-edit" class="popup">
+      <article id="popup-edit-container" class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="edit-form" id="edit-popup-form" novalidate>
           <div class="popup__field">
@@ -135,9 +142,11 @@
           class="popup__close-button button"
         ></button>
       </article>
+    </section>
 
-      <!-- todo add pop-up -->
-      <article id="add-popup" class="popup__container">
+    <!-- * add pop-up -->
+    <section id="popup-add" class="popup">
+      <article id="popup-add-container" class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form name="add-form" id="add-popup-form" novalidate>
           <!-- name -->
@@ -185,9 +194,11 @@
           class="popup__close-button button"
         ></button>
       </article>
+    </section>
 
-      <!-- todo card pop-up -->
-      <article id="card-popup" class="popup__card">
+    <!-- * card pop-up -->
+    <section id="popup-card" class="popup popup_background_darknes">
+      <article id="popup-card-container" class="popup__card">
         <img class="popup__card-image" />
         <h2 class="popup__card-title"></h2>
         <button
@@ -198,9 +209,5 @@
         ></button>
       </article>
     </section>
-    <!--  ! скрипты -->
-    <script src="./functional/constants.js"></script>
-    <script src="./functional/index.js"></script>
-    <script src="./functional/validation.js"></script>
   </body>
 </html>
