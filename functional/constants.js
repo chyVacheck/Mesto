@@ -49,5 +49,6 @@ const errorMesages = {
   valueMissing: 'Вы пропустили это поле.',
 }
 
-const modificationPopupOpened = '.popup_opened';
-const classPopupButtonClose = '.popup__close-button';
+const selectorPopupOpened = '.popup_opened';
+const selectorPopupButtonClose = '.popup__close-button';
+const selectorButton = 'button';

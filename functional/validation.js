@@ -1,25 +1,21 @@
-const formAdd = {
-  formSelector: '#add-popup-form',
-  button: 'button',
-  submitButtonSelector: '#add-button-submit',
-  buttonValid: 'popup__submit-button_valid',
-  buttonInValid: 'popup__submit-button_invalid',
+const form = {
+  formSelector: 'form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  activeButtonClass: 'popup__submit-button_valid',
+  inactiveButtonClass: 'popup__submit-button_invalid',
+  errorClass: '.popup__error-mesage',
 };
 
-const formEdit = {
-  formSelector: '#edit-popup-form',
-  button: 'button',
-  submitButtonSelector: '#button-submit',
-  buttonValid: 'popup__submit-button_valid',
-  buttonInValid: 'popup__submit-button_invalid',
-}
-
 function enableValidation(config) {
-  // находим нужную форму
-  const form = document.querySelector(config.formSelector);
-  // навешиваем на нее слушатель submit
-  form.addEventListener('submit', (event) => handleFormSubmit(event, config));
-  form.addEventListener('input', (event) => handleFormInput(event, config));
+  // находим все формы
+  const forms = Array.from(document.querySelectorAll(config.formSelector));
+
+  // навешиваем на каждую форму слушатели submit и input
+  forms.forEach(function (item) {
+    item.addEventListener('submit', (event) => handleFormSubmit(event, config));
+    item.addEventListener('input', (event) => handleFormInput(event, config));
+  });
 };
 
 function handleFormSubmit(event, config){
@@ -48,7 +44,7 @@ function handleFormInput(event, config){
 }
 
 function showFieldError(input) {
-  const span = input.nextElementSibling;
+  const span = input.nextElementSibling; 
   span.textContent = input.validationMessage;
 }
 
@@ -58,18 +54,16 @@ function setSubmitButtonState(form, config){
 
   if (isValid) {
     button.removeAttribute(qualifiedName = 'disabled');
-    button.classList.remove(config.buttonInValid);
-    button.classList.add(config.buttonValid);
-    button.classList.add(config.button);
+    button.classList.remove(config.inactiveButtonClass);
+    button.classList.add(config.activeButtonClass);
+    button.classList.add(selectorButton);
   } else {
     button.setAttribute(qualifiedName = 'disabled', value = true);
-    button.classList.add(config.buttonInValid);
-    button.classList.remove(config.buttonValid);
-    button.classList.remove(config.button);
+    button.classList.add(config.inactiveButtonClass);
+    button.classList.remove(config.activeButtonClass);
+    button.classList.remove(selectorButton);
   }
 
 }
 
-enableValidation(formAdd);
-enableValidation(formEdit);
-
+enableValidation(form);

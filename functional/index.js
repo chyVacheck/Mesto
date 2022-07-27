@@ -75,7 +75,7 @@ function closePopup(popup) {
  * 
  * @param {вроде как сам элемент} evt 
  */ 
-function submitFormForPopupEdit(evt) {
+function submitFormForPopupEdit() {
   //перезаписываем значения в profileIndo взятое из popupEditForm...
   profileNickname.textContent = popupEditFormName.value;
   profileDescription.textContent = popupEditFormInfo.value;
@@ -92,8 +92,7 @@ function submitFormForPopupEdit(evt) {
 function submitFormForPopupAdd(evt) {
   evt.preventDefault();
   //создаем карточку для добавления
-  const card = createCard(popupAddFormName.value, popupAddFormInfo.value);
-  renderCard(card, elementsListCard);
+  addCard(popupAddFormName.value, popupAddFormInfo.value, elementsListCard);
   closePopup(popupAdd);
 }
 
@@ -168,8 +167,8 @@ function closeWithEscape (event) {
  * @param {event} event - event
  */
 function closeWithClick (event) {
-  const popup = findOpenedPopup();  
-  const buttonClose = popup.querySelector(classPopupButtonClose);
+  const popup = findOpenedPopup();
+  const buttonClose = popup.querySelector(selectorPopupButtonClose); 
   if ((event.target === popup) || (event.target === buttonClose)) {
     closePopup(popup);
   }
@@ -177,8 +176,12 @@ function closeWithClick (event) {
 
 //находим открытый popup по модификатору
 function findOpenedPopup(){
-  const popup = page.querySelector(modificationPopupOpened);
-  return popup;
+  return page.querySelector(selectorPopupOpened);
+}
+
+function addCard(name, link, elementsListCard){
+  const card = createCard(name, link);
+  renderCard(card, elementsListCard);
 }
 
 // слушатель на кнопку редактирования профиля
@@ -202,6 +205,5 @@ popupAddForm.addEventListener('submit', submitFormForPopupAdd);
 
 //*загружаем на сайт карточки
 initialCards.forEach(function (item) {
-  const card = createCard(item.name, item.link);
-  renderCard(card, elementsListCard);
+  addCard(item.name, item.link, elementsListCard);
 });
