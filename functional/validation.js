@@ -4,6 +4,7 @@ const form = {
   submitButtonSelector: '.popup__submit-button',
   activeButtonClass: 'popup__submit-button_valid',
   inactiveButtonClass: 'popup__submit-button_invalid',
+  buttonClass: 'button',
   errorClass: '.popup__error-mesage',
 };
 
@@ -61,7 +62,7 @@ function setSubmitButtonState(form, config){
     button.setAttribute(qualifiedName = 'disabled', value = true);
     button.classList.add(config.inactiveButtonClass);
     button.classList.remove(config.activeButtonClass);
-    button.classList.remove(selectorButton);
+    button.classList.remove(config.buttonClass);
   }
 
 }
