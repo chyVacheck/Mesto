@@ -248,6 +248,10 @@ popupEditForm.addEventListener('submit', submitFormForPopupEdit);
 popupAddForm.addEventListener('submit', submitFormForPopupAdd);
 
 //*загружаем на сайт карточки
-for (let i = 0; i < initialCards.length; i++) {
-  addNewCard(initialCards, i);
-};
+initialCards.forEach(function (item) {
+  addCard(item.name, item.link, elementsListCard);
+});
+
+
+
+// export { popupCardImage, popupCardTitle, popupCard }
