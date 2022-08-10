@@ -51,3 +51,4 @@ const errorMesages = {
 
 const selectorPopupOpened = '.popup_opened';
 const selectorPopupButtonClose = '.popup__close-button';
+const selectorButton = 'button';
