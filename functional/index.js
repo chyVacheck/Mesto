@@ -1,3 +1,8 @@
+export { popupCardImage, popupCardTitle, popupCard };
+export { openPopup };
+
+import { Card } from './Card.js';
+
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 
@@ -114,15 +119,18 @@ function openPopup(popup) {
   cardImage.alt = name;
   const cardName = card.querySelector('.elements__card-title');
   cardName.textContent = name;
+
   // обьявляем константы (кнопки: удаления, картинки, лайка)
   const cardButtonTrash = card.querySelector('#button-trash');
   const cardButtonImage = card.querySelector('.elements__card-image-button');
   const cardButtonLike = card.querySelector('.elements__card-like');
+
   // слушатель на кнопку удаления
   cardButtonTrash.addEventListener('click', () => {
     const item = cardButtonTrash.closest('.elements__card');
     item.remove();
   });
+
   // слушатель на кнопку-картинку
   cardButtonImage.addEventListener('click', () =>{
     // меняем значения в pop-up на значения нашей карточки
@@ -132,6 +140,7 @@ function openPopup(popup) {
     //открытие
     openPopup(popupCard);
   });
+
   // слушатель на кнопку лайка
   cardButtonLike.addEventListener('click', () => {
     cardButtonLike.classList.toggle('elements__card-like_active');
@@ -165,14 +174,14 @@ function closeWithEscape (event) {
  */
  function closeWithClick (event) {
   const popup = findOpenedPopup();
-  const buttonClose = popup.querySelector(selectorPopupButtonClose); 
+  const buttonClose = popup.querySelector(selectorPopupButtonClose);
   if ((event.target === popup) || (event.target === buttonClose)) {
     closePopup(popup);
   }
 }
 //находим открытый popup по модификатору
 function findOpenedPopup(){
-  return page.querySelector(selectorPopupOpened);
+  return document.querySelector(selectorPopupOpened);
 }
 function addCard(name, link, elementsListCard){
   const card = createCard(name, link);
@@ -186,20 +195,22 @@ profileEditButton.addEventListener('click', () => {
   popupEditFormInfo.placeholder = profileDescription.textContent;
   openPopup(popupEdit);
 });
+
 // слушатель на кнопку создания новой карточки
 profileAddNewCardButton.addEventListener('click', () => {
   popupAddForm.reset();
   openPopup(popupAdd);
 });
+
 // слушатель на submit в popup редактирования
 popupEditForm.addEventListener('submit', submitFormForPopupEdit);
+
 // слушатель на submit в popup добавлении карточки
 popupAddForm.addEventListener('submit', submitFormForPopupAdd);
+
 //*загружаем на сайт карточки
 initialCards.forEach(function (item) {
-  addCard(item.name, item.link, elementsListCard);
+  const card = new Card('#template-сard', item);
+  card.generateCard();
+  card.renderCard(elementsListCard);
 });
-
-
-
-// export { popupCardImage, popupCardTitle, popupCard }

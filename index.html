@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="./pages/index.css" />
     <!--  ! скрипты -->
     <script defer src="./functional/constants.js"></script>
-    <script defer src="./functional/index.js"></script>
+    <script defer type='module' src="./functional/index.js"></script>
+    <script defer type='module' src="./functional/Card.js"></script>
     <script defer src="./functional/validation.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale = 1" />
@@ -71,7 +72,7 @@
         <div class="elements__card-title-and-like">
           <h2 class="elements__card-title"></h2>
           <button
-            if="button-like"
+            id="button-like"
             aria-label="поставить или убрать лайк"
             type="button"
             class="elements__card-like button"
