@@ -51,3 +51,13 @@ const errorMesages = {
 
 const selectorPopupOpened = '.popup_opened';
 const selectorPopupButtonClose = '.popup__close-button';
+
+const form = {
+  formSelector: 'form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  activeButtonClass: 'popup__submit-button_valid',
+  inactiveButtonClass: 'popup__submit-button_invalid',
+  buttonClass: 'button',
+  errorSelector: '.popup__error-mesage',
+};

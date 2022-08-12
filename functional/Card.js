@@ -36,7 +36,7 @@ export class Card {
   renderCard(container){
     container.prepend(this._element);
   }
-
+  
   // слушатели на кнопки
   _setEventListeners() {
   
