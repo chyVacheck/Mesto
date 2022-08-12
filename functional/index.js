@@ -156,6 +156,9 @@ profileEditButton.addEventListener('click', () => {
   //записываем в editFormInput значение из profile
   popupEditFormName.value = profileNickname.textContent;
   popupEditFormInfo.value = profileDescription.textContent;
+  objEditForm.showError(popupEditFormName);
+  objEditForm.showError(popupEditFormInfo);
+  objEditForm.setSubmitButtonState(true);
   openPopup(popupEdit);
 });
 

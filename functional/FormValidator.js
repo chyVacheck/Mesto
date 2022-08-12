@@ -32,10 +32,10 @@ export class FormValidator {
 
     const input = event.target;
     formObj.setSubmitButtonState();
-    formObj._showError(input);
+    formObj.showError(input);
   }
 
-  _showError(input){
+  showError(input){
     const span = input.nextElementSibling; 
     span.textContent = input.validationMessage;
   }
