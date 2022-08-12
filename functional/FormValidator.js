@@ -12,26 +12,26 @@ export class FormValidator {
     this._errorClass = config.errorClass;
 
     // форма
-    this._form = this._findForm();
+    this.form = this._findForm();
   }
 
   enableValidation(){
-    this._form.addEventListener('submit', (event) => this._handleFormSubmit(event, this));
-    this._form.addEventListener('input', (event) => this._handleFormInput(event, this));
+    this.form.addEventListener('submit', (event) => this._handleFormSubmit(event, this));
+    this.form.addEventListener('input', (event) => this._handleFormInput(event, this));
   }
 
   _handleFormSubmit(event, formObj) {
     event.preventDefault();
-    const isValid = formObj._form.checkValidity();
+    const isValid = formObj.form.checkValidity();
     if (isValid) {
-      formObj._setSubmitButtonState();
+      formObj.setSubmitButtonState();
     }
   }
 
   _handleFormInput(event, formObj) {
 
     const input = event.target;
-    formObj._setSubmitButtonState();
+    formObj.setSubmitButtonState();
     formObj._showError(input);
   }
 
@@ -41,9 +41,9 @@ export class FormValidator {
   }
 
   //включить или выключить кнопку отправки формы
-  _setSubmitButtonState(){
-    const isValid = this._form.checkValidity();
-    const button = this._form.querySelector(this._submitButtonSelector);
+  setSubmitButtonState(isValid = this.form.checkValidity()){
+
+    const button = this.form.querySelector(this._submitButtonSelector);
     if (isValid) {
       button.removeAttribute('disabled', false);
       button.classList.remove(this._inactiveButtonClass);
@@ -64,7 +64,3 @@ export class FormValidator {
   }
 
 }
-
-const one = new FormValidator(form);
-
-one.enableValidation();

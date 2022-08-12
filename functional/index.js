@@ -3,6 +3,7 @@ export { openPopup };
 
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { initialCards, selectorPopupOpened, selectorPopupButtonClose, form } from './constants.js';
 
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
@@ -60,7 +61,7 @@ const popupCardTitle = popupCard.querySelector('.popup__card-title');
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 
-  popup.addEventListener('click', closeWithClick);
+  popup.addEventListener('mousedown', closeWithClick);
   window.addEventListener('keydown', closeWithEscape);
 }
 
@@ -71,7 +72,7 @@ function openPopup(popup) {
  */ 
  function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  popup.removeEventListener('click', closeWithClick);
+  popup.removeEventListener('mousedown', closeWithClick);
   window.removeEventListener('keydown', closeWithEscape);
 }
 
@@ -86,7 +87,7 @@ function openPopup(popup) {
   profileNickname.textContent = popupEditFormName.value;
   profileDescription.textContent = popupEditFormInfo.value;
   closePopup(popupEdit);
-  objEditForm._form.reset();
+  objEditForm.form.reset();
 }
 
 /**
@@ -99,13 +100,28 @@ function openPopup(popup) {
  function submitFormForPopupAdd(evt) {
   evt.preventDefault();
   //создаем карточку для добавления
-  const newCard = new Card('#template-сard', {
+  const card = {
     name: popupAddFormName.value,
     link: popupAddFormInfo.value,
+  };
+  createCard(card, elementsListCard);
+  closePopup(popupAdd);
+
+  popupAddForm.reset();
+}
+
+/**
+ * Функция создания card и добавления ее в контейнер
+ * @param {obj} card - обьект карточки которую нужно создать и добавить
+ * @param {Element} elementsListCard - то куда нужно добавить карточку
+ */
+function createCard(card, elementsListCard){
+  const newCard = new Card('#template-сard', {
+    name: card.name,
+    link: card.link,
   });
   newCard.generateCard();
   newCard.renderCard(elementsListCard);
-  closePopup(popupAdd);
 }
 
 /**
@@ -138,14 +154,15 @@ function findOpenedPopup(){
 // слушатель на кнопку редактирования профиля
 profileEditButton.addEventListener('click', () => {
   //записываем в editFormInput значение из profile
-  popupEditFormName.placeholder = profileNickname.textContent;
-  popupEditFormInfo.placeholder = profileDescription.textContent;
+  popupEditFormName.value = profileNickname.textContent;
+  popupEditFormInfo.value = profileDescription.textContent;
   openPopup(popupEdit);
 });
 
 // слушатель на кнопку создания новой карточки
 profileAddNewCardButton.addEventListener('click', () => {
   popupAddForm.reset();
+  objAddForm.setSubmitButtonState(false);
   openPopup(popupAdd);
 });
 
@@ -157,9 +174,8 @@ popupAddForm.addEventListener('submit', submitFormForPopupAdd);
 
 //*загружаем на сайт карточки
 initialCards.forEach(function (item) {
-  const card = new Card('#template-сard', item);
-  card.generateCard();
-  card.renderCard(elementsListCard);
+  createCard(item, elementsListCard);
+  
 });
 
 //включаем валидацию на формы

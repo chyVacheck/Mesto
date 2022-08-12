@@ -1,5 +1,4 @@
-//? cписок информации для всех карточек
-const initialCards = [
+export const initialCards = [
   {
     name: 'Карачаевск',
     link: 'https://images.unsplash.com/photo-1588584922681-745a2223f72c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
@@ -42,17 +41,10 @@ const initialCards = [
   }
 ]
 
-const errorMesages = {
-  tooShort: 'Ввод слишком короткий.',
-  tooLong: 'Ввод слишком длинный.',
-  typeMismatchUrl: 'Введите ссылку на изображение.',
-  valueMissing: 'Вы пропустили это поле.',
-}
+export const selectorPopupOpened = '.popup_opened';
+export const selectorPopupButtonClose = '.popup__close-button';
 
-const selectorPopupOpened = '.popup_opened';
-const selectorPopupButtonClose = '.popup__close-button';
-
-const form = {
+export const form = {
   formSelector: 'form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-button',

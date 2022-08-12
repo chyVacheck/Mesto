@@ -4,12 +4,7 @@
   <head>
     <!--  ! стили -->
     <link rel="stylesheet" href="./pages/index.css" />
-    <!--  ! скрипты -->
-    <script defer src="./functional/constants.js"></script>
-    <script defer type='module' src="./functional/index.js"></script>
-    <script defer type='module' src="./functional/Card.js"></script>
-    <script defer type='module' src="./functional/FormValidator.js"></script>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale = 1" />
     <meta charset="UTF-8" />
     <title>Mesto</title>
@@ -97,7 +92,7 @@
               name="name"
               type="text"
               required
-              placeholder="Жак-Ив Кусто"
+              placeholder="Введите имя"
               class="popup__input"
               id="edit-input-name"
             />
@@ -115,7 +110,7 @@
               type="text"
               name="info"
               required
-              placeholder="Иследователь океана"
+              placeholder="Введите информацию о вас"
               class="popup__input"
               id="edit-input-info"
             />
@@ -127,10 +122,9 @@
           </div>
           <!-- submit -->
           <button
-            disabled
             type="submit"
             id="button-submit"
-            class="popup__submit-button popup__submit-button_invalid"
+            class="popup__submit-button popup__submit-button_valid button"
           >
             Сохранить
           </button>
@@ -211,5 +205,7 @@
         ></button>
       </article>
     </section>
+    <!--  ! скрипты -->
+    <script defer type="module" src="./functional/index.js"></script>
   </body>
 </html>
