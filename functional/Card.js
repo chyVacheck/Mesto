@@ -41,9 +41,7 @@ export class Card {
   
     // слушатель на кнопку удаления
     this._buttonClose.addEventListener('click', () => {
-      const item = this._buttonClose.closest('.elements__card');
-      item.remove();
-      this._element = null;
+      this.removeCard();
     });
 
     // слушатель на кнопку-картинку
@@ -61,7 +59,16 @@ export class Card {
     });
   };
   
+  // смена вида лайка
   changeLike() {
     this._buttonLike.classList.toggle('elements__card-like_active');
   }
+
+  // удаление карточки
+  removeCard() {
+    const item = this._buttonClose.closest('.elements__card');
+    item.remove();
+    this._element = null;
+  }
+
 }
