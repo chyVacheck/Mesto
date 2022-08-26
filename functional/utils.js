@@ -6,3 +6,6 @@ export {Card};
 
 import {FormValidator} from './FormValidator.js';
 export {FormValidator};
+
+import { Popup } from './Popup.js';
+export { Popup };

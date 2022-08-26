@@ -1,7 +1,7 @@
 export { popupCardImage, popupCardTitle, popupCard };
 export { openPopup };
 
-import { Card, FormValidator } from './utils.js';
+import { Card, FormValidator, Popup } from './utils.js';
 import { initialCards, selectorPopupOpened, selectorPopupButtonClose, form } from './constants.js';
 
 const page = document.querySelector('.page');

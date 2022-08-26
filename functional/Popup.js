@@ -1,9 +1,10 @@
 import { selectorPopupButtonClose } from './constants.js';
 
 export class Popup{
-  constructor(selector){
-    this._selector = selector;
-    this._popup = _getTemplate();
+  constructor(popupSelector){
+    this._selector = popupSelector;
+    this._popup = this._getTemplate();
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
   
   _handleEscClose(event) {
@@ -11,7 +12,7 @@ export class Popup{
       this.close();
     }
   }
-
+ 
   setEventListeners(event) {
     const buttonClose = this._popup.querySelector(selectorPopupButtonClose);
     if ((event.target === this._popup) || (event.target === buttonClose)) {
@@ -19,11 +20,17 @@ export class Popup{
     }
   }
 
+  // открытие поп-апа
   open() {
     this._popup.classList.add('popup_opened');
+    this._popup.addEventListener('mousedown', this.setEventListeners.bind(this));
+    window.addEventListener('keydown', this._handleEscClose);
   }
 
+  // закрытие поп-апа
   close() {
+    console.log(this);
+    window.removeEventListener('keydown', this._handleEscClose);
     this._popup.classList.remove('popup_opened');
   }
 
