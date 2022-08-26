@@ -1,4 +1,4 @@
-import {popupCardImage, popupCardTitle, popupCard, openPopup} from './utils.js';
+import {popupWithImage} from './utils.js';
 
 export class Card {
   constructor(templateSelector, item){
@@ -46,11 +46,7 @@ export class Card {
 
     // слушатель на кнопку-картинку
     this._buttonImage.addEventListener('click', () => {
-      popupCardImage.src = this._image;
-      popupCardImage.alt = this._title;
-      popupCardTitle.textContent = this._title;
-
-      openPopup(popupCard);
+      popupWithImage.open(this._image, this._title);
     });
 
     // слушатель на кнопку лайка
@@ -70,5 +66,4 @@ export class Card {
     item.remove();
     this._element = null;
   }
-
 }

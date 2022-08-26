@@ -29,7 +29,6 @@ export class Popup{
 
   // закрытие поп-апа
   close() {
-    console.log(this);
     window.removeEventListener('keydown', this._handleEscClose);
     this._popup.classList.remove('popup_opened');
   }
@@ -40,4 +39,4 @@ export class Popup{
     return popup;    
   }
 
-}
+};

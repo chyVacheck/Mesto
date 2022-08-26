@@ -1,7 +1,5 @@
-export { popupCardImage, popupCardTitle, popupCard };
-export { openPopup };
 
-import { Card, FormValidator, Popup } from './utils.js';
+import { Card, FormValidator, Popup, PopupWithImage } from './utils.js';
 import { initialCards, selectorPopupOpened, selectorPopupButtonClose, form } from './constants.js';
 
 const page = document.querySelector('.page');
@@ -47,6 +45,8 @@ const popupAddFormName = popupAddForm.querySelector('#add-input-name');
 const popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
 
 //* pop-up Card
+export const popupWithImage = new PopupWithImage('#popup-card');
+
 const popupCard = page.querySelector('#popup-card');
 const popupCardImage = popupCard.querySelector('.popup__card-image');
 const popupCardTitle = popupCard.querySelector('.popup__card-title');
@@ -177,7 +177,7 @@ popupAddForm.addEventListener('submit', submitFormForPopupAdd);
 //*загружаем на сайт карточки
 initialCards.forEach(function (item) {
   createCard(item, elementsListCard);
-  
+
 });
 
 //включаем валидацию на формы

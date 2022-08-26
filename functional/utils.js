@@ -1,5 +1,3 @@
-import {popupCardImage, popupCardTitle, popupCard, openPopup} from './index.js';
-export {popupCardImage, popupCardTitle, popupCard, openPopup};
 
 import {Card} from './Card.js';
 export {Card};
@@ -9,3 +7,9 @@ export {FormValidator};
 
 import { Popup } from './Popup.js';
 export { Popup };
+
+import { PopupWithImage } from './PopupWithImage.js';
+export { PopupWithImage };
+
+import { popupWithImage } from './index.js';
+export { popupWithImage };
