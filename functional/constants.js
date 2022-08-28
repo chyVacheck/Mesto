@@ -41,7 +41,7 @@ export const initialCards = [
   }
 ]
 
-export const selectorPopupOpened = '.popup_opened';
+export const classPopupOpened = 'popup_opened';
 export const selectorPopupButtonClose = '.popup__close-button';
 
 export const form = {
