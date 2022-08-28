@@ -13,3 +13,12 @@ export { PopupWithImage };
 
 import { popupWithImage } from './index.js';
 export { popupWithImage };
+
+import { PopupWithForm } from './PopupWithForm.js';
+export { PopupWithForm };
+
+import { Section } from './Section.js';
+export { Section };
+
+import { UserInfo } from './UserInfo.js';
+export { UserInfo };
