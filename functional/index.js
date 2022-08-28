@@ -1,9 +1,6 @@
 
-import { Card, FormValidator } from './utils.js';
-import { PopupWithImage, PopupWithForm } from './utils.js';
-import { Section } from './utils.js';
+import { Card, FormValidator, PopupWithImage, PopupWithForm, Section, UserInfo } from './utils.js';
 import { initialCards, form } from './constants.js';
-import { UserInfo } from './utils.js';
 
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
@@ -56,7 +53,7 @@ const popupAddFormName = popupAddForm.querySelector('#add-input-name');
 const popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
 
 //* pop-up Card
-export const popupWithImage = new PopupWithImage('#popup-card');
+const popupWithImage = new PopupWithImage('#popup-card');
 
 //* Object Section
 const cardList = new Section(
