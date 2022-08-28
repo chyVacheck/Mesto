@@ -1,11 +1,11 @@
-import {popupWithImage} from './utils.js';
 
 export class Card {
-  constructor(templateSelector, item){
+  constructor(templateSelector, item, handleCardClick){
     this._templateSelector = templateSelector;
     this._title = item.name;
     this._image = item.link;
     this._element = this._getTemplate();
+    this._handleCardClick = handleCardClick;
     // buttons
     this._buttonClose = this._element.querySelector('#button-trash');
     this._buttonImage = this._element.querySelector('.elements__card-image-button');
@@ -46,7 +46,7 @@ export class Card {
 
     // слушатель на кнопку-картинку
     this._buttonImage.addEventListener('click', () => {
-      popupWithImage.open(this._image, this._title);
+      this._handleCardClick();
     });
 
     // слушатель на кнопку лайка
