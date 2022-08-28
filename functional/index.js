@@ -1,5 +1,5 @@
 
-import { Card, FormValidator, PopupWithImage, PopupWithForm, Section, UserInfo } from './utils.js';
+import { Card, FormValidator, Popup, PopupWithImage, PopupWithForm, Section, UserInfo } from './utils.js';
 import { initialCards, form } from './constants.js';
 
 const page = document.querySelector('.page');
