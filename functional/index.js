@@ -1,24 +1,33 @@
 
-import { Card, FormValidator, Popup, PopupWithImage } from './utils.js';
-import { initialCards, selectorPopupOpened, selectorPopupButtonClose, form } from './constants.js';
+import { Card, FormValidator } from './utils.js';
+import { PopupWithImage, PopupWithForm } from './utils.js';
+import { Section } from './utils.js';
+import { initialCards, form } from './constants.js';
+import { UserInfo } from './utils.js';
 
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 
 //* profile
+const user = new UserInfo({
+  name: '.profile__nickname',
+  info: '.profile__description',
+});
+
 const profile = content.querySelector('.profile');
 const profileInfo = profile.querySelector('.profile__info');
-const profileNickname = profileInfo.querySelector('.profile__nickname');
-const profileDescription = profileInfo.querySelector('.profile__description');
 // all buttons in profile
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');   //button
 const profileAddNewCardButton = profile.querySelector('.profile__add-button');  //button
 
 //* elements
+const cardListSection = '.elements__list-cards';
 const elements = content.querySelector('.elements');
-const elementsListCard = elements.querySelector('.elements__list-cards');
+const elementsListCard = elements.querySelector(cardListSection);
 
 //* pop-up Edit
+const popupProfileEdit = new PopupWithForm('#popup-edit', submitFormForPopupEdit);
+
 let formEdit = {};
 Object.assign(formEdit, form)
 formEdit.formSelector = '#edit-popup-form';
@@ -32,6 +41,8 @@ const popupEditFormName = popupEditForm.querySelector('#edit-input-name');
 const popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
 
 //* pop-up Add
+const popupCardAdd = new PopupWithForm('#popup-add', submitFormForPopupAdd);
+
 let formAdd = {};
 Object.assign(formAdd, form)
 formAdd.formSelector = '#add-popup-form';
@@ -47,46 +58,35 @@ const popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
 //* pop-up Card
 export const popupWithImage = new PopupWithImage('#popup-card');
 
-const popupCard = page.querySelector('#popup-card');
-const popupCardImage = popupCard.querySelector('.popup__card-image');
-const popupCardTitle = popupCard.querySelector('.popup__card-title');
-
-
-/**
- * Добавляет модификатор к DOM элементу
- *
- * @param {DOM} popup DOM элемент, которому необходимо добавить модификатор
- */ 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-
-  popup.addEventListener('mousedown', closeWithClick);
-  window.addEventListener('keydown', closeWithEscape);
-}
-
-/**
- * Убирает модификатор у DOM элемента
- *
- * @param {DOM} popup DOM элемент, которому необходимо добавить модификатор
- */ 
- function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  popup.removeEventListener('mousedown', closeWithClick);
-  window.removeEventListener('keydown', closeWithEscape);
-}
+//* Object Section
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (cardItem) => {
+      console.log('делаем карточку');
+      const newCard = new Card('#template-сard', cardItem, () => {
+        popupWithImage.open(cardItem.link, cardItem.name);
+      });
+      newCard.generateCard();
+      newCard.renderCard(elementsListCard);
+    },
+  },
+  cardListSection
+);
 
 /**
  * Сохраняет данные из form в popup-edit и перезаписывает их profile
  * После чего закрывает popup-edit
  * 
  * @param {вроде как сам элемент} evt 
- */ 
- function submitFormForPopupEdit() {
+ */
+function submitFormForPopupEdit() {
   //перезаписываем значения в profileIndo взятое из popupEditForm...
-  profileNickname.textContent = popupEditFormName.value;
-  profileDescription.textContent = popupEditFormInfo.value;
-  closePopup(popupEdit);
-  objEditForm.form.reset();
+  user.setUserInfo({
+    name: popupEditFormName.value,
+    info: popupEditFormInfo.value,
+  });
+  popupProfileEdit.close();
 }
 
 /**
@@ -95,92 +95,43 @@ function openPopup(popup) {
  * после чего закрывает popup-add
  * 
  * @param {DOM} evt //не уверен, что это DOM
- */ 
- function submitFormForPopupAdd(evt) {
+ */
+function submitFormForPopupAdd(evt) {
   evt.preventDefault();
-  //создаем карточку для добавления
   const card = {
     name: popupAddFormName.value,
     link: popupAddFormInfo.value,
-  };
-  createCard(card, elementsListCard);
-  closePopup(popupAdd);
-
-  popupAddForm.reset();
-}
-
-/**
- * Функция создания card и добавления ее в контейнер
- * @param {obj} card - обьект карточки которую нужно создать и добавить
- * @param {Element} elementsListCard - то куда нужно добавить карточку
- */
-function createCard(card, elementsListCard){
-  const newCard = new Card('#template-сard', {
-    name: card.name,
-    link: card.link,
+  }
+  //создаем карточку для добавления
+  const newCard = new Card('#template-сard', card, () => {
+    popupWithImage.open(card.link, card.name);
   });
-  newCard.generateCard();
-  newCard.renderCard(elementsListCard);
-}
-
-/**
- * Вызывает функцию закрытия popup через нажатие конопки esc
- * @param {event} event - event
- */
-function closeWithEscape (event) {
-  if (event.key === 'Escape') {
-    const popup = findOpenedPopup();
-    closePopup(popup);
-  }
-}
-
-/**
- * Вызывает функцию закрытия popup через клик мышей вне контейнера
- * @param {event} event - event
- */
- function closeWithClick (event) {
-  const popup = findOpenedPopup();
-  const buttonClose = popup.querySelector(selectorPopupButtonClose);
-  if ((event.target === popup) || (event.target === buttonClose)) {
-    closePopup(popup);
-  }
-}
-//находим открытый popup по модификатору
-function findOpenedPopup(){
-  return document.querySelector(selectorPopupOpened);
+  cardList.addItem(newCard.generateCard());
+  popupCardAdd.close();
 }
 
 // слушатель на кнопку редактирования профиля
 profileEditButton.addEventListener('click', () => {
+  const userInfo = user.getUserInfo();
   //записываем в editFormInput значение из profile
-  popupEditFormName.value = profileNickname.textContent;
-  popupEditFormInfo.value = profileDescription.textContent;
+  popupEditFormName.value = userInfo.name;
+  popupEditFormInfo.value = userInfo.info;
   objEditForm.showError(popupEditFormName);
   objEditForm.showError(popupEditFormInfo);
   objEditForm.setSubmitButtonState(true);
-  openPopup(popupEdit);
+  popupProfileEdit.open();
 });
 
 // слушатель на кнопку создания новой карточки
 profileAddNewCardButton.addEventListener('click', () => {
-  popupAddForm.reset();
+  popupCardAdd.form.reset();
   objAddForm.setSubmitButtonState(false);
-  openPopup(popupAdd);
+  popupCardAdd.open();
 });
 
-// слушатель на submit в popup редактирования
-popupEditForm.addEventListener('submit', submitFormForPopupEdit);
-
-// слушатель на submit в popup добавлении карточки
-popupAddForm.addEventListener('submit', submitFormForPopupAdd);
-
-//*загружаем на сайт карточки
-initialCards.forEach(function (item) {
-  createCard(item, elementsListCard);
-
-});
 
 //включаем валидацию на формы
 objEditForm.enableValidation();
 objAddForm.enableValidation();
 
+cardList.renderItems();
