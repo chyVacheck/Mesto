@@ -1,5 +1,5 @@
 export class FormValidator {
-  constructor(config){
+  constructor(config) {
     // классы и селекторы
     this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
@@ -15,7 +15,7 @@ export class FormValidator {
     this.form = this._findForm();
   }
 
-  enableValidation(){
+  enableValidation() {
     this.form.addEventListener('submit', (event) => this._handleFormSubmit(event, this));
     this.form.addEventListener('input', (event) => this._handleFormInput(event, this));
   }
@@ -35,13 +35,13 @@ export class FormValidator {
     formObj.showError(input);
   }
 
-  showError(input){
-    const span = input.nextElementSibling; 
+  showError(input) {
+    const span = input.nextElementSibling;
     span.textContent = input.validationMessage;
   }
 
   //включить или выключить кнопку отправки формы
-  setSubmitButtonState(isValid = this.form.checkValidity()){
+  setSubmitButtonState(isValid = this.form.checkValidity()) {
 
     const button = this.form.querySelector(this._submitButtonSelector);
     if (isValid) {
