@@ -11,9 +11,6 @@ export { Popup };
 import { PopupWithImage } from './PopupWithImage.js';
 export { PopupWithImage };
 
-import { popupWithImage } from './index.js';
-export { popupWithImage };
-
 import { PopupWithForm } from './PopupWithForm.js';
 export { PopupWithForm };
 

@@ -60,7 +60,6 @@ const cardList = new Section(
   {
     items: initialCards,
     renderer: (cardItem) => {
-      console.log('делаем карточку');
       const newCard = new Card('#template-сard', cardItem, () => {
         popupWithImage.open(cardItem.link, cardItem.name);
       });
