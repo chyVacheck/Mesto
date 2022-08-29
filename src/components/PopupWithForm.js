@@ -8,8 +8,6 @@ export class PopupWithForm extends Popup {
     
     this.form = this._popup.querySelector('form');
     this._inputs = Array.from(this.form.querySelectorAll('.popup__input'));
-    this._inputName = this._inputs[0];
-    this._inputInfo = this._inputs[1];
   }
 
   // закрытие поп-апа
@@ -21,10 +19,7 @@ export class PopupWithForm extends Popup {
 
   // возвращает текст с inputs
   _getInputValues() {
-    return {
-      name: this._inputName.value,
-      info: this._inputInfo.value,
-    };
+    return this._inputs();
   }
 
   // вешаем слушатели
