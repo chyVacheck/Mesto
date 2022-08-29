@@ -1,8 +1,7 @@
 
 export class FormValidator {
-  constructor(config) {
+  constructor(config, formElement) {
     // классы и селекторы
-    this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
 
@@ -13,7 +12,11 @@ export class FormValidator {
     this._errorClass = config.errorClass;
 
     // форма
-    this.form = this._findForm();
+    this.form = formElement;
+    // кнопка
+    this._button = this.form.querySelector(this._submitButtonSelector);
+    // массив input-ов
+    this._inputList = Array.from(this.form.querySelectorAll(this._inputSelector));
   }
 
   enableValidation() {
@@ -30,10 +33,23 @@ export class FormValidator {
   }
 
   _handleFormInput(event, formObj) {
-
     const input = event.target;
     formObj.setSubmitButtonState();
     formObj.showError(input);
+  }
+
+  _hideError(input) {
+    const span = input.nextElementSibling;
+    span.textContent = '';
+  }
+
+  resetValidation() {
+    this.setSubmitButtonState(false);
+
+    this._inputList.forEach((inputElement) => {
+      this._hideError(inputElement);
+    });
+
   }
 
   showError(input) {
@@ -44,24 +60,17 @@ export class FormValidator {
   //включить или выключить кнопку отправки формы
   setSubmitButtonState(isValid = this.form.checkValidity()) {
 
-    const button = this.form.querySelector(this._submitButtonSelector);
     if (isValid) {
-      button.removeAttribute('disabled', false);
-      button.classList.remove(this._inactiveButtonClass);
-      button.classList.add(this._activeButtonClass);
-      button.classList.add(this._buttonClass);
+      this._button.removeAttribute('disabled', false);
+      this._button.classList.remove(this._inactiveButtonClass);
+      this._button.classList.add(this._activeButtonClass);
+      this._button.classList.add(this._buttonClass);
     } else {
-      button.setAttribute('disabled', true);
-      button.classList.add(this._inactiveButtonClass);
-      button.classList.remove(this._activeButtonClass);
-      button.classList.remove(this._buttonClass);
+      this._button.setAttribute('disabled', true);
+      this._button.classList.add(this._inactiveButtonClass);
+      this._button.classList.remove(this._activeButtonClass);
+      this._button.classList.remove(this._buttonClass);
     }
-  }
-
-  // поиск form
-  _findForm() {
-    const form = document.querySelector(this._formSelector)
-    return form;
   }
 
 }
