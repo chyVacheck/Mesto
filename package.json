@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "delete": "rd /s /q dist",
-    "delBuild": "rd /s /q dist && webpack",
+    "deleteAndBuild": "rd /s /q dist && webpack",
     "dev": "webpack serve"
   },
   "repository": {
