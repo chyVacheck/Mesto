@@ -1,13 +1,12 @@
 
 //* import from components 
-import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 
-import { submitFormForPopupEdit, submitFormForPopupAdd } from '../pages/index.js';
+import { submitFormForPopupEdit, submitFormForPopupAdd, createCard } from '../pages/index.js';
 
 export const initialCards = [
   {
@@ -64,6 +63,7 @@ export const form = {
   errorSelector: '.popup__error-mesage',
 };
 
+// для поиска на странице
 const page = document.querySelector('.page');
 
 //* profile
@@ -101,10 +101,8 @@ export const cardList = new Section(
   {
     items: initialCards,
     renderer: (cardItem) => {
-      const newCard = new Card('#template-сard', cardItem, () => {
-        popupWithImage.open(cardItem.link, cardItem.name);
-      });
-      cardList.addItem(newCard.generateCard());
+      const newCard = createCard(cardItem);
+      cardList.addItem(newCard);
     },
   },
   cardListSection

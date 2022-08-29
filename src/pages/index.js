@@ -5,7 +5,7 @@ import '/src/pages/index.css'; // добавьте импорт главного
 import { Card } from '../components/Card.js';
 
 //* import from constants 
-import { 
+import {
   user,
   profileEditButton, profileAddNewCardButton,
   popupProfileEdit, objEditForm,
@@ -43,12 +43,16 @@ export function submitFormForPopupEdit() {
 export function submitFormForPopupAdd(evt) {
   evt.preventDefault();
   const card = popupCardAdd.getInputValues();
-  //создаем карточку для добавления
-  const newCard = new Card('#template-сard', card, () => {
-    popupWithImage.open(card.link, card.name);
-  });
-  cardList.addItem(newCard.generateCard());
+  const newCard = createCard(card);
+  cardList.addItem(newCard);
   popupCardAdd.close();
+}
+
+export function createCard(item) {
+  const cardElement = new Card('#template-сard', item, () => {
+    popupWithImage.open(item.link, item.name);
+  });
+  return cardElement.generateCard();
 }
 
 // слушатель на кнопку редактирования профиля
