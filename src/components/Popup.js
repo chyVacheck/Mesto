@@ -8,6 +8,7 @@ export class Popup {
 
     this._handleEscClose = this._handleEscClose.bind(this);
     this._closeByClick = this._closeByClick.bind(this);
+    this._buttonClose = this._popup.querySelector(selectorPopupButtonClose);
   }
 
   // функция зарытия поп-апа, по нажатию Esc
@@ -19,8 +20,7 @@ export class Popup {
 
   // функция зарытия поп-апа, по клику
   _closeByClick(event) {
-    const buttonClose = this._popup.querySelector(selectorPopupButtonClose);
-    if ((event.target === this._popup) || (event.target === buttonClose)) {
+    if ((event.target === this._popup) || (event.target === this._buttonClose)) {
       this.close();
     }
   }
