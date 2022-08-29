@@ -1,4 +1,6 @@
 
+import '/src/pages/index.css'; // добавьте импорт главного файла стилей
+
 import { Card, FormValidator, Popup, PopupWithImage, PopupWithForm, Section, UserInfo } from './utils.js';
 import { initialCards, form } from './constants.js';
 
