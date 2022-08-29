@@ -1,3 +1,4 @@
+
 export class FormValidator {
   constructor(config) {
     // классы и селекторы
