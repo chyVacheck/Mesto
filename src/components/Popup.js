@@ -33,7 +33,6 @@ export class Popup {
   // открытие поп-апа
   open() {
     this._popup.classList.add(classPopupOpened);
-    this.setEventListeners();
     window.addEventListener('keydown', this._handleEscClose);
   }
 
