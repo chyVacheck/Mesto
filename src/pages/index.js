@@ -1,8 +1,8 @@
 
 import '/src/pages/index.css'; // добавьте импорт главного файла стилей
 
-import { Card, FormValidator, Popup, PopupWithImage, PopupWithForm, Section, UserInfo } from './utils.js';
-import { initialCards, form } from './constants.js';
+import { Card, FormValidator, Popup, PopupWithImage, PopupWithForm, Section, UserInfo } from '../utils/utils.js'
+import { initialCards, form } from '../utils/constants.js';
 
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');

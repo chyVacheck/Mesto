@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // module.exports — это синтаксис экспорта в Node.js
 module.exports = {
-  entry: { main: './src/functional/index.js' },// указали первое место, куда заглянет webpack, — файл index.js в папке functioanl в папке src
+  entry: { main: './src/pages/index.js' },// указали первое место, куда заглянет webpack, — файл index.js в папке functioanl в папке src
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
