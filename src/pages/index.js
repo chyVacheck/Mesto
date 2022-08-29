@@ -1,7 +1,16 @@
 
 import '/src/pages/index.css'; // добавьте импорт главного файла стилей
 
-import { Card, FormValidator, Popup, PopupWithImage, PopupWithForm, Section, UserInfo } from '../utils/utils.js'
+//* import from components 
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+// import { Popup } from '../components/Popup.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
+
+//* import from constants 
 import { initialCards, form } from '../utils/constants.js';
 
 const page = document.querySelector('.page');
@@ -26,6 +35,7 @@ const elementsListCard = elements.querySelector(cardListSection);
 
 //* pop-up Edit
 const popupProfileEdit = new PopupWithForm('#popup-edit', submitFormForPopupEdit);
+popupProfileEdit.setEventListeners();
 
 let formEdit = {};
 Object.assign(formEdit, form)
@@ -41,6 +51,7 @@ const popupEditFormInfo = popupEditForm.querySelector('#edit-input-info');
 
 //* pop-up Add
 const popupCardAdd = new PopupWithForm('#popup-add', submitFormForPopupAdd);
+popupCardAdd.setEventListeners();
 
 let formAdd = {};
 Object.assign(formAdd, form)
@@ -56,6 +67,7 @@ const popupAddFormInfo = popupAddForm.querySelector('#add-input-info');
 
 //* pop-up Card
 const popupWithImage = new PopupWithImage('#popup-card');
+popupWithImage.setEventListeners();
 
 //* Object Section
 const cardList = new Section(
