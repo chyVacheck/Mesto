@@ -7,7 +7,7 @@ export class Card {
     this._element = this._getTemplate();
     this._handleCardClick = handleCardClick;
     // buttons
-    this._buttonClose = this._element.querySelector('#button-trash');
+    this._buttonTrash = this._element.querySelector('#button-trash');
     this._buttonImage = this._element.querySelector('.elements__card-image-button');
     this._buttonLike = this._element.querySelector('#button-like');
   }
@@ -30,17 +30,12 @@ export class Card {
 
     return this._element;
   }
-
-  // слушатели на кнопки
-  renderCard(container){
-    container.prepend(this._element);
-  }
   
   // слушатели на кнопки
   _setEventListeners() {
   
     // слушатель на кнопку удаления
-    this._buttonClose.addEventListener('click', () => {
+    this._buttonTrash.addEventListener('click', () => {
       this.removeCard();
     });
 
@@ -62,7 +57,7 @@ export class Card {
 
   // удаление карточки
   removeCard() {
-    const item = this._buttonClose.closest('.elements__card');
+    const item = this._buttonTrash.closest('.elements__card');
     item.remove();
     this._element = null;
   }

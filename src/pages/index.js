@@ -77,8 +77,7 @@ const cardList = new Section(
       const newCard = new Card('#template-сard', cardItem, () => {
         popupWithImage.open(cardItem.link, cardItem.name);
       });
-      newCard.generateCard();
-      newCard.renderCard(elementsListCard);
+      cardList.addItem(newCard.generateCard());
     },
   },
   cardListSection
