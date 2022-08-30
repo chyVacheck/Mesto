@@ -1,13 +1,4 @@
 
-//* import from components 
-import { FormValidator } from '../components/FormValidator.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { Section } from '../components/Section.js';
-import { UserInfo } from '../components/UserInfo.js';
-
-import { submitFormForPopupEdit, submitFormForPopupAdd, createCard } from '../pages/index.js';
-
 export const initialCards = [
   {
     name: 'Карачаевск',
@@ -66,44 +57,12 @@ export const form = {
 // для поиска на странице
 const page = document.querySelector('.page');
 
-//* profile
-export const user = new UserInfo({
-  name: '.profile__nickname',
-  info: '.profile__description',
-});
-
 const profile = page.querySelector('.profile');
 const profileInfo = profile.querySelector('.profile__info');
 // all buttons in profile
 export const profileEditButton = profileInfo.querySelector('.profile__edit-button');   //button
 export const profileAddNewCardButton = profile.querySelector('.profile__add-button');  //button
 
-//* elements
-export const cardListSection = '.elements__list-cards';
+export const popupEditForm = page.querySelector('#edit-popup-form');
+export const popupAddForm = page.querySelector('#add-popup-form');
 
-//* pop-up Edit
-export const popupProfileEdit = new PopupWithForm('#popup-edit', submitFormForPopupEdit);
-
-const popupEditForm = page.querySelector('#edit-popup-form');
-export const objEditForm = new FormValidator(form, popupEditForm);
-
-//* pop-up Add
-export const popupCardAdd = new PopupWithForm('#popup-add', submitFormForPopupAdd);
-
-const popupAddForm = page.querySelector('#add-popup-form');
-export const objAddForm = new FormValidator(form, popupAddForm);
-
-//* pop-up Card
-export const popupWithImage = new PopupWithImage('#popup-card');
-
-//* Object Section
-export const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (cardItem) => {
-      const newCard = createCard(cardItem);
-      cardList.addItem(newCard);
-    },
-  },
-  cardListSection
-);
