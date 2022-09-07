@@ -2,12 +2,14 @@
 import '/src/pages/index.css'; // добавьте импорт главного файла стилей
 
 //* import from components 
+import { Api } from '../components/Api.js'
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js'
+
 
 //* import from constants 
 import {
@@ -16,6 +18,26 @@ import {
   popupEditForm, popupAddForm,
 
 } from '../utils/constants.js';
+
+//* Object Api
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/',
+  headers: {
+    authorization: "6e341995-26c2-4e13-90fe-459da74d1f67",
+    "Content-Type": "application/json",
+  },
+})
+
+
+api.getUserInfo()
+  .then((res) => {
+    user.setUserInfo({
+      name: res.name,
+      info: res.about
+    })
+  })
+
+ 
 
 //* profile
 const user = new UserInfo({
@@ -31,26 +53,22 @@ const objEditForm = new FormValidator(form, popupEditForm);
 //* pop-up Add
 const popupCardAdd = new PopupWithForm('#popup-add', submitFormForPopupAdd);
 
-
 const objAddForm = new FormValidator(form, popupAddForm);
 
 //* pop-up Card
 const popupWithImage = new PopupWithImage('#popup-card');
 
-
 //* elements
 const cardListSection = '.elements__list-cards';
 
-
 //* Object Section
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (cardItem) => {
-      const newCard = createCard(cardItem);
-      cardList.addItem(newCard);
-    },
+const cardList = new Section({
+  items: initialCards,
+  renderer: (cardItem) => {
+    const newCard = createCard(cardItem);
+    cardList.addItem(newCard);
   },
+},
   cardListSection
 );
 
@@ -66,7 +84,20 @@ popupWithImage.setEventListeners();
  */
 function submitFormForPopupEdit() {
   //перезаписываем значения в profileIndo взятое из popupEditForm...
-  user.setUserInfo(popupProfileEdit.getInputValues());
+  const profileInfo = popupProfileEdit.getInputValues()
+
+  api.setUserInfo({
+    name: profileInfo.name,
+    about: profileInfo.info
+  })
+    .then((res) => {
+      console.log('Имя успешно передано на сервер')
+      return res.json()
+    })
+    .then((res) => console.log(res))
+    .catch((error) => console.log(`Ошибка: ${error}`))
+
+  user.setUserInfo(profileInfo);
   popupProfileEdit.close();
 }
 
