@@ -31,12 +31,12 @@ ___
 + При нажатии кнопки Escape pop-up закроется
 + Затемнение всех кнопок при наведении на них мышей
 + Package.json
-  - script: build (создает проект в папке [dist](././dist/))
-  - script: delete (удаляет папку [dist](././dist/) и ее содержимое)
+  - script: build (создает проект в папке 'dist')
+  - script: delete (удаляет папку 'dist' и ее содержимое)
   - script: deleteAndBuild (совмещает скрипты build и delete)
   - script: dev (запускает локальный сервер с портом 8080)
   - script: predeploy (выолняет скрипт build)
-  - script: deploy (сначала выполняет скрипт predeploy, а затем 'заливает' данные из папки [dist](././dist/) в ветку  gh-pages)
+  - script: deploy (сначала выполняет скрипт predeploy, а затем 'заливает' данные из папки 'dist' в ветку  gh-pages)
 ___
 
 ## Что использовалось ?
