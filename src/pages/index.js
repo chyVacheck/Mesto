@@ -13,10 +13,9 @@ import { UserInfo } from '../components/UserInfo.js'
 
 //* import from constants 
 import {
-  initialCards, form,
+  form,
   profileEditButton, profileAddNewCardButton,
   popupEditForm, popupAddForm,
-
 } from '../utils/constants.js';
 
 //* Object Api
@@ -28,21 +27,21 @@ const api = new Api({
   },
 })
 
-
-api.getUserInfo()
-  .then((res) => {
-    user.setUserInfo({
-      name: res.name,
-      info: res.about
-    })
+//берем имя из сервера и устанавливаем
+api.getUserInfo().then((res) => {
+  user.setUserInfo({
+    name: res.name,
+    info: res.about
   })
+})
 
- 
+const serverCardArray = []
 
 //* profile
 const user = new UserInfo({
   name: '.profile__nickname',
   info: '.profile__description',
+  image: '.profile__avatar',
 });
 
 //* pop-up Edit
@@ -63,14 +62,13 @@ const cardListSection = '.elements__list-cards';
 
 //* Object Section
 const cardList = new Section({
-  items: initialCards,
+  // items: initialCards,
+  items: serverCardArray,
   renderer: (cardItem) => {
     const newCard = createCard(cardItem);
     cardList.addItem(newCard);
   },
-},
-  cardListSection
-);
+}, cardListSection);
 
 popupProfileEdit.setEventListeners();
 popupCardAdd.setEventListeners();
@@ -94,7 +92,6 @@ function submitFormForPopupEdit() {
       console.log('Имя успешно передано на сервер')
       return res.json()
     })
-    .then((res) => console.log(res))
     .catch((error) => console.log(`Ошибка: ${error}`))
 
   user.setUserInfo(profileInfo);
@@ -112,6 +109,8 @@ function submitFormForPopupAdd(evt) {
   evt.preventDefault();
   const card = popupCardAdd.getInputValues();
   const newCard = createCard(card);
+  api.addNewCard(card)
+    .catch(error => console.log(`Ошибка: ${error}`))
   cardList.addItem(newCard);
   popupCardAdd.close();
 }
@@ -141,4 +140,13 @@ profileAddNewCardButton.addEventListener('click', () => {
 objEditForm.enableValidation();
 objAddForm.enableValidation();
 
-cardList.renderItems();
+api.getCardArray()
+  .then((res) => {
+    res.forEach((element, index) => {
+      serverCardArray[index] = element
+
+    })
+    cardList.renderItems();
+    console.log('Массив был сохранен')
+  })
+
