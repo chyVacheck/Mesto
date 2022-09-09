@@ -11,11 +11,16 @@
   <body class="page">
     <!-- ! шапка сайта, блок header -->
     <header class="header">
-      <img src="<%=require('./images/logo.svg')%>" class="header__logo" lang="en" alt="Mesto" />
+      <img
+        src="<%=require('./images/logo.svg')%>"
+        class="header__logo"
+        lang="en"
+        alt="Mesto"
+      />
     </header>
     <!-- ! контент сайта, блок content -->
     <main class="content">
-      <!-- todo секция profile -->
+      <!-- ? секция profile -->
       <section class="profile">
         <img
           class="profile__avatar"
@@ -40,7 +45,7 @@
         ></button>
         <!--? пока что нет скрипта для этого -->
       </section>
-      <!-- todo секция elements-->
+      <!-- ? секция elements-->
       <section class="elements">
         <ul class="elements__list-cards"></ul>
       </section>
@@ -63,12 +68,15 @@
         </button>
         <div class="elements__card-title-and-like">
           <h2 class="elements__card-title"></h2>
-          <button
-            id="button-like"
-            aria-label="поставить или убрать лайк"
-            type="button"
-            class="elements__card-like button"
-          ></button>
+          <div>
+            <button
+              id="button-like"
+              aria-label="поставить или убрать лайк"
+              type="button"
+              class="elements__card-like button"
+            ></button>
+            <p class="elements__card-like-number"></p>
+          </div>
         </div>
       </li>
     </template>
