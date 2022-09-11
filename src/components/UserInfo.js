@@ -18,6 +18,6 @@ export class UserInfo {
   setUserInfo(user) {
     this._name.textContent = user.name;
     this._about.textContent = user.about;
-    this.id = user._id;
+    this._id = user._id;
   }
 }

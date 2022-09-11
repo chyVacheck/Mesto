@@ -59,8 +59,8 @@ export class Api {
 
   }
 
-  deleteCard(cardId) {
-    return fetch(`${this._adress}/cohort-50/cards/${cardId}`, {
+  deleteCard(card) {
+    return fetch(`${this._adress}/cohort-50/cards/${card._id}`, {
       method: "DELETE",
       headers: this._headers,
     })
@@ -71,19 +71,27 @@ export class Api {
       .catch((error) => console.log(`Ошибка: ${error}`))
   }
 
-  // changeLike(idCard) {
-  //   fetch(`${this._adress}/cohort-50/cards/${idCard}/likes`, {
-  //     method: "PUT",
-  //     headers: this._headers,
-  //   })
-  //     .then((res) => {
-  //       console.log('Запрос на лайк карточки успешно отправлен');
-  //       return res.json();
-  //     })
-  //     .catch((error) => {
-  //       return console.log(`Ошибка: ${error}`);
-  //     })
 
-  // }
+  changeLike(card, userId) {
+    let action = "PUT"
+    card.likes.forEach((like) => {
+      if (like._id == userId){
+        action = "DELETE"
+      }
+    })
+
+    return fetch(`${this._adress}/cohort-50/cards/${card._id}/likes`,{
+      method: action,
+      headers: this._headers,
+    })
+    .then((res) => {
+      
+      console.log('Лайк был', action);
+      return res.json();
+    })
+    .catch((error) => {
+      return console.log(`Ошибка: ${error}`);
+    })
+  }
 
 }

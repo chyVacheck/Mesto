@@ -4,15 +4,15 @@ export class Card {
     this._templateSelector = templateSelector;
     this._title = data.item.name;
     this._image = data.item.link;
-    this._likes = data.item.likes;
+    this.likes = data.item.likes;
+    this._id = data.item._id;
     this._element = this._getTemplate();
-    this.id = data.item._id;
 
     this._handleCardClick = data.handleCardClick;
     this._handleLikeClick = data.handleLikeClick;
     this._handleDeleteIconClick = data.handleDeleteIconClick;
 
-    this._elementCardLikes = this._element.querySelector('.elements__card-like-number');
+    this.elementCardLikes = this._element.querySelector('.elements__card-like-number');
     // buttons
     this.buttonTrash = this._element.querySelector('#button-trash');
     this._buttonImage = this._element.querySelector('.elements__card-image-button');
@@ -33,7 +33,7 @@ export class Card {
     const elementCardImage = this._element.querySelector('.elements__card-image');
     elementCardImage.src = this._image;
     elementCardImage.alt = this._title;
-    this._elementCardLikes.textContent = this._likes.length;
+    this.elementCardLikes.textContent = this.likes.length;
     this._element.querySelector('.elements__card-title').textContent = this._title;
 
     return this._element;
@@ -54,9 +54,8 @@ export class Card {
 
     // слушатель на кнопку лайка
     this._buttonLike.addEventListener('click', () => {
-      this.changeLike();
       this._handleLikeClick();
-      this._elementCardLikes.textContent = this._likes.length;
+      this.changeLike();
     });
   };
 

@@ -126,9 +126,11 @@ function submitFormForPopupAdd(evt) {
  */
 function submitFormForPopupDelete(evt) {
   evt.preventDefault();
-  api.deleteCard(popupDelete.card.id);
-  popupDelete.card.removeCard();
-  popupDelete.close();
+  api.deleteCard(popupDelete.card)
+  .then(() => {
+    popupDelete.card.removeCard();
+    popupDelete.close();
+  })
 }
 
 // функция по созданию DOM элемента карточки
@@ -139,12 +141,10 @@ function createCard(item) {
       popupWithImage.open(item.link, item.name);
     },
     handleLikeClick: () => {
-      api.changeLike(item._id)
+      api.changeLike(item, user._id)
         .then((res) => {
-          console.log(res);
-        })
-        .then((res) => {
-          item = res;
+          item.likes = res.likes;
+          cardElement.elementCardLikes.textContent = res.likes.length;
         })
 
     },
@@ -153,10 +153,17 @@ function createCard(item) {
     }
   },
     '#template-сard');
+  //* удаляем кнопку муссорки у чюжих карточек
   const card = cardElement.generateCard();
-  if (item.owner._id != user.id) {
+  if (item.owner._id != user._id) {
     cardElement.buttonTrash.remove();
   }
+  //* ставим лайк если в списке лайкнувших есть id пользователя
+  item.likes.forEach((item) => {
+    if (item._id == user._id) {
+      cardElement.changeLike();
+    }
+  })
   return card;
 }
 
