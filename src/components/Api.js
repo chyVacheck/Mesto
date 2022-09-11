@@ -31,7 +31,7 @@ export class Api {
   }
 
   getCardArray() {
-    return fetch(`${this._adress}/cohort-50/cards `, {
+    return fetch(`${this._adress}/cohort-50/cards`, {
       method: "GET",
       headers: this._headers,
     })
@@ -43,7 +43,7 @@ export class Api {
   }
 
   addNewCard(card) {
-    return fetch(`${this._adress}/cohort-50/cards `, {
+    return fetch(`${this._adress}/cohort-50/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -51,9 +51,39 @@ export class Api {
         link: card.link
       })
     })
-      .then(() => console.log('Карточка загружена на сервер'))
+      .then((res) => {
+        console.log('Карточка загружена на сервер');
+        return res.json()
+      })
       .catch((error) => console.log(`Ошибка: ${error}`))
 
   }
+
+  deleteCard(cardId) {
+    return fetch(`${this._adress}/cohort-50/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then((res) => {
+        console.log('Карточка удалена с сервера');
+        return res.json()
+      })
+      .catch((error) => console.log(`Ошибка: ${error}`))
+  }
+
+  // changeLike(idCard) {
+  //   fetch(`${this._adress}/cohort-50/cards/${idCard}/likes`, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //   })
+  //     .then((res) => {
+  //       console.log('Запрос на лайк карточки успешно отправлен');
+  //       return res.json();
+  //     })
+  //     .catch((error) => {
+  //       return console.log(`Ошибка: ${error}`);
+  //     })
+
+  // }
 
 }

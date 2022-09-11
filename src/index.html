@@ -113,7 +113,7 @@
               minlength="2"
               maxlength="200"
               type="text"
-              name="info"
+              name="about"
               required
               placeholder="Введите информацию о вас"
               class="popup__input"
@@ -206,6 +206,30 @@
           aria-label="закрыть окно pop-up"
           type="button"
           id="card-button-close"
+          class="popup__close-button button"
+        ></button>
+      </article>
+    </section>
+
+    <!-- * delete pop-up -->
+    <section id="popup-delete" class="popup">
+      <article id="popup-delete-container" class="popup__container">
+        <h2 class="popup__title popup__title_small-popup">Вы уверены?</h2>
+        <form name="delete-form" id="delete-popup-form" novalidate>
+          <!-- submit -->
+          <button
+            type="submit"
+            id="delete-button-submit"
+            class="button popup__submit-button popup__submit-button_valid"
+          >
+            Да
+          </button>
+        </form>
+
+        <button
+          aria-label="закрыть окно pop-up"
+          type="button"
+          id="delete-button-close"
           class="popup__close-button button"
         ></button>
       </article>

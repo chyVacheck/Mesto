@@ -1,13 +1,20 @@
 
 export class Card {
-  constructor(templateSelector, item, handleCardClick){
+  constructor(data, templateSelector) {
     this._templateSelector = templateSelector;
-    this._title = item.name;
-    this._image = item.link;
+    this._title = data.item.name;
+    this._image = data.item.link;
+    this._likes = data.item.likes;
     this._element = this._getTemplate();
-    this._handleCardClick = handleCardClick;
+    this.id = data.item._id;
+
+    this._handleCardClick = data.handleCardClick;
+    this._handleLikeClick = data.handleLikeClick;
+    this._handleDeleteIconClick = data.handleDeleteIconClick;
+
+    this._elementCardLikes = this._element.querySelector('.elements__card-like-number');
     // buttons
-    this._buttonTrash = this._element.querySelector('#button-trash');
+    this.buttonTrash = this._element.querySelector('#button-trash');
     this._buttonImage = this._element.querySelector('.elements__card-image-button');
     this._buttonLike = this._element.querySelector('#button-like');
   }
@@ -15,9 +22,9 @@ export class Card {
   // поиск template
   _getTemplate() {
     const cardElement = document.querySelector(this._templateSelector)
-    .content
-    .cloneNode(true);
-    return cardElement;    
+      .content
+      .cloneNode(true);
+    return cardElement;
   }
 
   // создание карточки
@@ -26,17 +33,18 @@ export class Card {
     const elementCardImage = this._element.querySelector('.elements__card-image');
     elementCardImage.src = this._image;
     elementCardImage.alt = this._title;
+    this._elementCardLikes.textContent = this._likes.length;
     this._element.querySelector('.elements__card-title').textContent = this._title;
 
     return this._element;
   }
-  
+
   // слушатели на кнопки
   _setEventListeners() {
-  
+
     // слушатель на кнопку удаления
-    this._buttonTrash.addEventListener('click', () => {
-      this.removeCard();
+    this.buttonTrash.addEventListener('click', () => {
+      this._handleDeleteIconClick(this);
     });
 
     // слушатель на кнопку-картинку
@@ -47,9 +55,11 @@ export class Card {
     // слушатель на кнопку лайка
     this._buttonLike.addEventListener('click', () => {
       this.changeLike();
+      this._handleLikeClick();
+      this._elementCardLikes.textContent = this._likes.length;
     });
   };
-  
+
   // смена вида лайка
   changeLike() {
     this._buttonLike.classList.toggle('elements__card-like_active');
@@ -57,8 +67,9 @@ export class Card {
 
   // удаление карточки
   removeCard() {
-    const item = this._buttonTrash.closest('.elements__card');
+    const item = this.buttonTrash.closest('.elements__card');
     item.remove();
     this._element = null;
   }
 }
+
