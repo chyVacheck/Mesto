@@ -38,6 +38,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/popup/__title/popup__title.css ***!
   \*******************************************************************************************************************************************************************/
 .popup__title{font-family:Inter,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin:0 0 54px;max-width:330px}@media screen and (min-width:544px) and (max-width:1152px){.popup__title{font-size:21px;line-height:25.5px;margin-bottom:61.5px}}@media screen and (min-width:320px) and (max-width:544px){.popup__title{font-size:18px;line-height:22px;margin-bottom:75px}}
+/*!********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/popup/__title/_small-popup/popup__title_small-popup.css ***!
+  \********************************************************************************************************************************************************************************************/
+.popup__title_small-popup{margin-bottom:38px}
 /*!*******************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/popup/__field/popup__field.css ***!
   \*******************************************************************************************************************************************************************/
@@ -153,7 +157,11 @@
 /*!*****************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/elements/__card-title-and-like/elements__card-title-and-like.css ***!
   \*****************************************************************************************************************************************************************************************************/
-.elements__card-title-and-like{display:flex;justify-content:space-between;margin:0;padding:25px 15px 25px 21px;width:100%}
+.elements__card-title-and-like{display:flex;justify-content:space-between;margin:0;padding:25px 21px;width:100%}
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/elements/__card-like-number/elements__card-like-number.css ***!
+  \***********************************************************************************************************************************************************************************************/
+.elements__card-like-number{font-size:13px;font-style:normal;font-weight:400;line-height:16px;margin:0;max-height:16px;text-align:center}
 /*!***********************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/elements/__card-title/elements__card-title.css ***!
   \***********************************************************************************************************************************************************************************/
