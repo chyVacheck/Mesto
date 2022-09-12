@@ -11,9 +11,7 @@ export class Section {
   addItem(element) {
     this._container.prepend(element);
   }
-  // я попытался сделать, что вы сказали, но у меня не получилось :((
-  // ваш коментарий был серым, так что надеюусь за это сообщение мне не влетит
-
+  
   //вызывает renderer для каждого элемента
   renderItems() {
     this._initialArray.forEach(item => {

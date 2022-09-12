@@ -15,7 +15,7 @@ import { UserInfo } from '../components/UserInfo.js'
 import {
   form,
   profileEditButton, profileAddNewCardButton,
-  popupEditForm, popupAddForm,
+  popupEditForm, popupAddForm, popupAvatarForm
 } from '../utils/constants.js';
 import { PopupDelete } from '../components/PopupDelete.js';
 
@@ -35,11 +35,16 @@ const user = new UserInfo({
   name: '.profile__nickname',
   about: '.profile__description',
   image: '.profile__avatar',
-});
+},
+  () => { popupAvatar.open() }
+);
+user.setEventListner();
 
-//берем имя из сервера и устанавливаем
+
+//берем данные из сервера и устанавливаем
 api.getUserInfo().then((res) => {
   user.setUserInfo(res);
+  user.setUserAvatar(res.avatar);
 })
 
 //* pop-up Edit // меняет имя и описание в профиле
@@ -52,11 +57,16 @@ const popupCardAdd = new PopupWithForm('#popup-add', submitFormForPopupAdd);
 
 const objAddForm = new FormValidator(form, popupAddForm);
 
+//* pop-up Card
+const popupWithImage = new PopupWithImage('#popup-card');
+
 //* pop-up Delete // удаляет карточку
 const popupDelete = new PopupDelete('#popup-delete', submitFormForPopupDelete);
 
-//* pop-up Card
-const popupWithImage = new PopupWithImage('#popup-card');
+//* pop-up Avatar
+const popupAvatar = new PopupWithForm('#popup-avatar', submitFormForPopupAvatar);
+
+const objAvatarForm = new FormValidator(form, popupAvatarForm);
 
 //* elements
 const cardListSection = '.elements__list-cards';
@@ -74,8 +84,9 @@ const cardList = new Section({
 
 popupProfileEdit.setEventListeners();
 popupCardAdd.setEventListeners();
-popupDelete.setEventListeners();
 popupWithImage.setEventListeners();
+popupDelete.setEventListeners();
+popupAvatar.setEventListeners();
 
 /**
  * Сохраняет данные из form в popup-edit и перезаписывает их profile
@@ -85,11 +96,13 @@ popupWithImage.setEventListeners();
  */
 function submitFormForPopupEdit() {
   //перезаписываем значения в profileIndo взятое из popupEditForm...
+  popupProfileEdit.changeButtonText('Сохранение...');
   const profileInfo = popupProfileEdit.getInputValues()
 
   api.setUserInfo(profileInfo)
     .then((res) => {
       console.log('Имя успешно передано на сервер')
+      popupProfileEdit.changeButtonText('Сохранить');
       return res.json()
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
@@ -106,12 +119,14 @@ function submitFormForPopupEdit() {
  * @param {DOM} evt //не уверен, что это DOM
  */
 function submitFormForPopupAdd(evt) {
+  popupCardAdd.changeButtonText('Сохранение...');
   evt.preventDefault();
   const card = popupCardAdd.getInputValues();
   api.addNewCard(card)
     .then((res) => {
       const newCard = createCard(res);
       cardList.addItem(newCard);
+      popupDelete.changeButtonText('Сохранить');
     })
     .catch(error => console.log(`Ошибка: ${error}`))
   popupCardAdd.close();
@@ -122,15 +137,37 @@ function submitFormForPopupAdd(evt) {
  * а так же посылает на сервер запрос на удаление
  * карточки из массива карточек
  * 
- * @param {idCard} int // id карточки
+ * @param {evt} evt 
  */
 function submitFormForPopupDelete(evt) {
+  popupDelete.changeButtonText('Сохранение...');
   evt.preventDefault();
   api.deleteCard(popupDelete.card)
-  .then(() => {
-    popupDelete.card.removeCard();
-    popupDelete.close();
-  })
+    .then(() => {
+      popupDelete.card.removeCard();
+      popupDelete.close();
+      popupDelete.changeButtonText('Сохранить');
+    })
+  popupDelete.close();
+}
+
+/**
+ * Меняет ссылку фото аватара у пользователя 
+ * на введенную в поле формы ссылку
+ * 
+ * @param {evt} evt
+ */
+function submitFormForPopupAvatar(evt) {
+  popupAvatar.changeButtonText('Сохранение...');
+  evt.preventDefault();
+  const info = popupAvatar.getInputValues();
+  api.setUserAvatar(info.avatar)
+    .then((res) => {
+      popupAvatar.close();
+      user.setUserAvatar(res.avatar);
+      popupAvatar.changeButtonText('Сохранить');
+    })
+
 }
 
 // функция по созданию DOM элемента карточки
@@ -184,6 +221,8 @@ profileAddNewCardButton.addEventListener('click', () => {
 // включаем валидацию на формы
 objEditForm.enableValidation();
 objAddForm.enableValidation();
+objAvatarForm.enableValidation();
+
 
 api.getCardArray()
   .then((res) => {

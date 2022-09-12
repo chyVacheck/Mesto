@@ -63,6 +63,7 @@ const profileInfo = profile.querySelector('.profile__info');
 export const profileEditButton = profileInfo.querySelector('.profile__edit-button');   //button
 export const profileAddNewCardButton = profile.querySelector('.profile__add-button');  //button
 
+// all forms
 export const popupEditForm = page.querySelector('#edit-popup-form');
 export const popupAddForm = page.querySelector('#add-popup-form');
-
+export const popupAvatarForm = page.querySelector('#avatar-popup-form')

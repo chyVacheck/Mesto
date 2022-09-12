@@ -30,6 +30,24 @@ export class Api {
     })
   }
 
+  setUserAvatar(avatar) {
+    return fetch(`${this._adress}/cohort-50/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+
+      body: JSON.stringify({
+        avatar: avatar
+      })
+    })
+    .then((res) => {
+      console.log('Аватар был поменян');
+      return res.json();
+    })
+    .catch((error) => {
+      return console.log(`Ошибка: ${error}`);
+    })
+  }
+
   getCardArray() {
     return fetch(`${this._adress}/cohort-50/cards`, {
       method: "GET",
@@ -70,7 +88,6 @@ export class Api {
       })
       .catch((error) => console.log(`Ошибка: ${error}`))
   }
-
 
   changeLike(card, userId) {
     let action = "PUT"

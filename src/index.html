@@ -22,11 +22,8 @@
     <main class="content">
       <!-- ? секция profile -->
       <section class="profile">
-        <img
-          class="profile__avatar"
-          src="<%=require('./images/avatar.png')%>"
-          alt="здесь должен быть ваш аватар"
-        />
+        <div class="profile__avatar">
+        </div>
         <div class="profile__info">
           <div class="profile__nick-and-button">
             <h1 class="profile__nickname"></h1>
@@ -230,6 +227,44 @@
           aria-label="закрыть окно pop-up"
           type="button"
           id="delete-button-close"
+          class="popup__close-button button"
+        ></button>
+      </article>
+    </section>
+
+    <!-- * avatar pop-up -->
+    <section id="popup-avatar" class="popup">
+      <article id="popup-avatar-container" class="popup__container">
+        <h2 class="popup__title">Обновить автар</h2>
+        <form name="avatar-form" id="avatar-popup-form" novalidate>
+          <!-- url -->
+          <div class="popup__field">
+            <input
+              name="avatar"
+              required
+              type="url"
+              placeholder="Ссылка на картинку"
+              class="popup__input"
+              id="avatar-input-info"
+            />
+            <!-- error-mesage -->
+            <span class="popup__error-mesage" id="avatar-info-error-mesage"></span>
+          </div>
+          <!-- submit -->
+          <button
+            disabled
+            type="submit"
+            id="avatar-button-submit"
+            class="popup__submit-button popup__submit-button_invalid"
+          >
+            Сохранить
+          </button>
+        </form>
+
+        <button
+          aria-label="закрыть окно pop-up"
+          type="button"
+          id="avatar-button-close"
           class="popup__close-button button"
         ></button>
       </article>
