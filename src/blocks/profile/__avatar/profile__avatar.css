@@ -5,8 +5,9 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  background-position: 50% 50%;
+  background-position: center;
   background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .profile__avatar:hover::before {
