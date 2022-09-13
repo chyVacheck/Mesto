@@ -1,8 +1,8 @@
 import { PopupWithForm } from "./PopupWithForm.js";
 
 export class PopupDelete extends PopupWithForm {
-  constructor(popupSelector, submitFormForPopup) {
-    super(popupSelector, submitFormForPopup);
+  constructor(data, submitFormForPopup) {
+    super(data, submitFormForPopup);
   }
 
   // открытие поп-апа

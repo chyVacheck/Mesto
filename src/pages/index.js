@@ -9,6 +9,8 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js'
+import { selectorPopupButtonClose } from '../utils/constants.js';
+import { classPopupOpened } from '../utils/constants.js';
 
 
 //* import from constants 
@@ -35,36 +37,47 @@ const user = new UserInfo({
   name: '.profile__nickname',
   about: '.profile__description',
   image: '.profile__avatar',
-},
-  () => { popupAvatar.open() }
-);
+}, () => popupAvatar.open());
 user.setEventListner();
 
-
-//берем данные из сервера и устанавливаем
-api.getUserInfo().then((res) => {
-  user.setUserInfo(res);
-  user.setUserAvatar(res.avatar);
-})
-
 //* pop-up Edit // меняет имя и описание в профиле
-const popupProfileEdit = new PopupWithForm('#popup-edit', submitFormForPopupEdit);
+const popupProfileEdit = new PopupWithForm({
+  popupSelector: '#popup-edit',
+  classOpened: classPopupOpened,
+  selectorButtonClose: selectorPopupButtonClose,
+}, submitFormForPopupEdit);
 
 const objEditForm = new FormValidator(form, popupEditForm);
 
 //* pop-up Add // добавляет карточку
-const popupCardAdd = new PopupWithForm('#popup-add', submitFormForPopupAdd);
+const popupCardAdd = new PopupWithForm({
+  popupSelector: '#popup-add',
+  classOpened: classPopupOpened,
+  selectorButtonClose: selectorPopupButtonClose,
+}, submitFormForPopupAdd);
 
 const objAddForm = new FormValidator(form, popupAddForm);
 
 //* pop-up Card
-const popupWithImage = new PopupWithImage('#popup-card');
+const popupWithImage = new PopupWithImage({
+  popupSelector: '#popup-card',
+  classOpened: classPopupOpened,
+  selectorButtonClose: selectorPopupButtonClose,
+});
 
 //* pop-up Delete // удаляет карточку
-const popupDelete = new PopupDelete('#popup-delete', submitFormForPopupDelete);
+const popupDelete = new PopupDelete({
+  popupSelector: '#popup-delete',
+  classOpened: classPopupOpened,
+  selectorButtonClose: selectorPopupButtonClose,
+}, submitFormForPopupDelete);
 
 //* pop-up Avatar
-const popupAvatar = new PopupWithForm('#popup-avatar', submitFormForPopupAvatar);
+const popupAvatar = new PopupWithForm({
+  popupSelector: '#popup-avatar',
+  classOpened: classPopupOpened,
+  selectorButtonClose: selectorPopupButtonClose,
+}, submitFormForPopupAvatar);
 
 const objAvatarForm = new FormValidator(form, popupAvatarForm);
 
@@ -101,14 +114,16 @@ function submitFormForPopupEdit() {
 
   api.setUserInfo(profileInfo)
     .then((res) => {
-      console.log('Имя успешно передано на сервер')
-      popupProfileEdit.changeButtonText('Сохранить');
+      console.log('Имя успешно передано на сервер');
+      console.log('');
+      popupProfileEdit.close();
       return res.json()
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
-
-  user.setUserInfo(profileInfo);
-  popupProfileEdit.close();
+    .finally(() => {
+      popupProfileEdit.changeButtonText('Сохранить');
+      user.setUserInfo(profileInfo);
+    })
 }
 
 /**
@@ -119,17 +134,22 @@ function submitFormForPopupEdit() {
  * @param {DOM} evt //не уверен, что это DOM
  */
 function submitFormForPopupAdd(evt) {
-  popupCardAdd.changeButtonText('Сохранение...');
+  popupCardAdd.changeButtonText('Создание...');
   evt.preventDefault();
   const card = popupCardAdd.getInputValues();
   api.addNewCard(card)
     .then((res) => {
       const newCard = createCard(res);
       cardList.addItem(newCard);
-      popupDelete.changeButtonText('Сохранить');
+      console.log('Карточка успешно создана и сохранена на сервере');
+      console.log('');
+      popupCardAdd.close();
     })
     .catch(error => console.log(`Ошибка: ${error}`))
-  popupCardAdd.close();
+    .finally(() => {
+      popupCardAdd.changeButtonText('Создать');
+    })
+
 }
 
 /**
@@ -140,15 +160,15 @@ function submitFormForPopupAdd(evt) {
  * @param {evt} evt 
  */
 function submitFormForPopupDelete(evt) {
-  popupDelete.changeButtonText('Сохранение...');
   evt.preventDefault();
   api.deleteCard(popupDelete.card)
     .then(() => {
       popupDelete.card.removeCard();
       popupDelete.close();
-      popupDelete.changeButtonText('Сохранить');
+      console.log('Карточка удалена');
+      console.log('');
     })
-  popupDelete.close();
+    .catch((error) => console.log(`Ошибка: ${error}`))
 }
 
 /**
@@ -167,7 +187,8 @@ function submitFormForPopupAvatar(evt) {
       user.setUserAvatar(res.avatar);
       popupAvatar.changeButtonText('Сохранить');
     })
-
+    .catch((error) => console.log(`Ошибка: ${error}`))
+    .finally(() => popupAvatar.changeButtonText('Сохранить'))
 }
 
 // функция по созданию DOM элемента карточки
@@ -182,6 +203,14 @@ function createCard(item) {
         .then((res) => {
           item.likes = res.likes;
           cardElement.elementCardLikes.textContent = res.likes.length;
+        })
+        .then(() => {
+          cardElement.changeLike();
+          console.log('Поставили/убрали лайк');
+          console.log('');
+        })
+        .catch((error) => {
+          return console.log(`Ошибка: ${error}`);
         })
 
     },
@@ -208,7 +237,6 @@ function createCard(item) {
 profileEditButton.addEventListener('click', () => {
   popupProfileEdit.setInputValues(user.getUserInfo());
   objEditForm.resetValidation();
-  // objEditForm.setSubmitButtonState(true);
   popupProfileEdit.open();
 });
 
@@ -223,13 +251,20 @@ objEditForm.enableValidation();
 objAddForm.enableValidation();
 objAvatarForm.enableValidation();
 
-
-api.getCardArray()
-  .then((res) => {
-    res.forEach((element, index) => {
-      serverCardArray[res.length - index] = element
+Promise.all([api.getUserInfo(), api.getCardArray()])
+  // тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+  .then(([userData, cards]) => {
+    // тут установка данных пользователя
+    user.setUserInfo(userData);
+    user.setUserAvatar(userData.avatar);
+    console.log('Имя, описание и аватарка успешно получены с сервера');
+    console.log('');
+    // и тут отрисовка карточек
+    cards.forEach((element, index) => {
+      serverCardArray[cards.length - index] = element
     })
     cardList.renderItems();
     console.log('Массив был сохранен');
+    console.log('');
   })
-
+  .catch(err => console.log(`Ошибка: ${err}`));

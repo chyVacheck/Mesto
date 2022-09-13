@@ -55,7 +55,6 @@ export class Card {
     // слушатель на кнопку лайка
     this._buttonLike.addEventListener('click', () => {
       this._handleLikeClick();
-      this.changeLike();
     });
   };
 

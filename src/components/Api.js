@@ -5,17 +5,22 @@ export class Api {
     this._headers = setting.headers;
   }
 
+  _checkResponse(res) {
+    // тут проверка ответа
+    if (res.ok) {
+      console.log('Запрос на сервер обработан удачно');
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+
   //возвращает данные о пользователе, используя ссылку 
   getUserInfo() {
     return fetch(`${this._adress}/cohort-50/users/me`, {
       method: "GET",
       headers: this._headers,
     })
-      .then((res) => {
-        console.log('Данные о профиле успешно получены c серверa')
-        return res.json()
-      })
-      .catch((error) => console.log(`Ошибка: ${error}`))
+      .then(this._checkResponse);
   }
 
   setUserInfo(user) {
@@ -28,6 +33,7 @@ export class Api {
         about: user.about
       })
     })
+      .then(this._checkResponse)
   }
 
   setUserAvatar(avatar) {
@@ -39,13 +45,7 @@ export class Api {
         avatar: avatar
       })
     })
-    .then((res) => {
-      console.log('Аватар был поменян');
-      return res.json();
-    })
-    .catch((error) => {
-      return console.log(`Ошибка: ${error}`);
-    })
+      .then(this._checkResponse)
   }
 
   getCardArray() {
@@ -53,11 +53,7 @@ export class Api {
       method: "GET",
       headers: this._headers,
     })
-      .then((res) => {
-        console.log('Массив карточек успешно получен c серверa')
-        return res.json()
-      })
-      .catch((error) => console.log(`Ошибка: ${error}`))
+      .then(this._checkResponse)
   }
 
   addNewCard(card) {
@@ -69,12 +65,7 @@ export class Api {
         link: card.link
       })
     })
-      .then((res) => {
-        console.log('Карточка загружена на сервер');
-        return res.json()
-      })
-      .catch((error) => console.log(`Ошибка: ${error}`))
-
+      .then(this._checkResponse)
   }
 
   deleteCard(card) {
@@ -82,33 +73,21 @@ export class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then((res) => {
-        console.log('Карточка удалена с сервера');
-        return res.json()
-      })
-      .catch((error) => console.log(`Ошибка: ${error}`))
+      .then(this._checkResponse)
   }
 
   changeLike(card, userId) {
     let action = "PUT"
     card.likes.forEach((like) => {
-      if (like._id == userId){
+      if (like._id == userId) {
         action = "DELETE"
       }
     })
 
-    return fetch(`${this._adress}/cohort-50/cards/${card._id}/likes`,{
+    return fetch(`${this._adress}/cohort-50/cards/${card._id}/likes`, {
       method: action,
       headers: this._headers,
     })
-    .then((res) => {
-      
-      console.log('Лайк был', action);
-      return res.json();
-    })
-    .catch((error) => {
-      return console.log(`Ошибка: ${error}`);
-    })
+      .then(this._checkResponse)
   }
-
 }
