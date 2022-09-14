@@ -117,12 +117,12 @@ function submitFormForPopupEdit() {
       console.log('Имя успешно передано на сервер');
       console.log('');
       popupProfileEdit.close();
+      user.setUserInfo(profileInfo);
       return res.json()
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
     .finally(() => {
       popupProfileEdit.changeButtonText('Сохранить');
-      user.setUserInfo(profileInfo);
     })
 }
 
