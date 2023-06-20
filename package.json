@@ -9,7 +9,6 @@
     "delete": "rd /s /q dist",
     "deleteAndBuild": "rd /s /q dist && webpack",
     "dev": "webpack serve",
-
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -39,6 +38,7 @@
     "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
-    "core-js": "^3.25.0"
+    "core-js": "^3.25.0",
+    "gh-pages": "^5.0.0"
   }
 }
