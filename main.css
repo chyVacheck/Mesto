@@ -101,7 +101,7 @@
 /*!*************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__avatar/profile__avatar.css ***!
   \*************************************************************************************************************************************************************************/
-.profile__avatar{background-position:50%;background-repeat:no-repeat;background-size:100%;border-radius:50%;cursor:pointer;height:120px;overflow:hidden;position:relative;width:120px}.profile__avatar:hover:before{background-color:rgba(0,0,0,.6);content:"";height:100%;position:absolute;width:100%}.profile__avatar:hover:after{background-image:url(a086f758840ae814ecde.svg);content:"";height:26px;position:absolute;right:47px;top:47px;width:26px}
+.profile__avatar{background-position:50%;background-repeat:no-repeat;background-size:100%;border-radius:50%;cursor:pointer;height:120px;overflow:hidden;position:relative;width:120px}.profile__avatar:hover:before{background-color:rgba(0,0,0,.6);content:"";height:100%;position:absolute;width:100%}.profile__avatar:hover:after{background-image:url(ae1a976ddb506239e9f0.svg);content:"";height:26px;position:absolute;right:47px;top:47px;width:26px}
 /*!*********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__info/profile__info.css ***!
   \*********************************************************************************************************************************************************************/
@@ -145,7 +145,7 @@
 /*!***********************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/elements/__card-trash/elements__card-trash.css ***!
   \***********************************************************************************************************************************************************************************/
-.elements__card-trash{align-self:flex-end;background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);background-size:contain;border:0;height:19px;padding:0;position:absolute;right:20px;top:20px;width:18px}
+.elements__card-trash{align-self:flex-end;background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);background-size:contain;border:0;height:19px;padding:0;position:absolute;right:20px;top:20px;width:18px;z-index:1}
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/elements/__card-image-button/elements__card-image-button.css ***!
   \*************************************************************************************************************************************************************************************************/
